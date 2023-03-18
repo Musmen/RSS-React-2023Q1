@@ -1,8 +1,13 @@
+import './NavigationLink.css';
+
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const isActiveLink = (isActive: boolean) =>
-  `link navigation-link ${isActive ? 'navigation-link_active' : ''}`;
+const baseNavLinkClassName = 'NavigationLink';
+const activeNavLinkClassName = `${baseNavLinkClassName} ${baseNavLinkClassName}_active`;
+
+const getNavLinkClassName = ({ isActive }: { isActive: boolean }) =>
+  isActive ? activeNavLinkClassName : baseNavLinkClassName;
 
 interface Props {
   pageName: string;
@@ -14,7 +19,7 @@ class NavigationLink extends React.Component<Readonly<Props>> {
     const { pageName, to } = this.props;
 
     return (
-      <NavLink className={({ isActive }) => isActiveLink(isActive)} to={to}>
+      <NavLink className={getNavLinkClassName} to={to}>
         {pageName}
       </NavLink>
     );
