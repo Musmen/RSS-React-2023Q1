@@ -1,0 +1,16 @@
+.Footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 30px;
+
+  color: #282c34;
+
+  background-color: #61dafb;
+}
+
+.Footer__description {
+  margin: 0 10px;
+
+  font-weight: bold;
+}

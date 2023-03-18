@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import Header from '../Header/Header';
 import Main from '../Main/Main';
+import Footer from '../Footer/Footer';
 
 class App extends React.Component {
   render() {
@@ -12,6 +13,7 @@ class App extends React.Component {
       <BrowserRouter>
         <Header />
         <Main />
+        <Footer />
       </BrowserRouter>
     );
   }
