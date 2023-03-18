@@ -4,7 +4,7 @@ import React, { ChangeEvent, FormEvent } from 'react';
 
 const DEFAULT_SEARCH_VALUE = '';
 
-class SearchBar extends React.Component<null, { searchValue: string }> {
+class SearchBar extends React.Component<Record<string, never>, { searchValue: string }> {
   state = { searchValue: DEFAULT_SEARCH_VALUE };
 
   onClearBtnClickHandler = () => {
