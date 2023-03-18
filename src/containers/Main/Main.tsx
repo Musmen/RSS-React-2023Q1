@@ -10,7 +10,7 @@ import NotFound from '../../pages/NotFound/NotFound';
 class Main extends React.Component {
   render() {
     return (
-      <main>
+      <main className="Main">
         <Routes>
           <Route path={'/'} element={<Home />} />
           <Route path={'/about'} element={<About />} />
