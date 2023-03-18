@@ -1,13 +1,16 @@
 import React from 'react';
 
 import SearchBar from '../../components/SearchBar/SearhBar';
+import CardsList from '../../containers/CardsList/CardsList';
+
+import { cardsData } from '../../data/cardsData';
 
 class Home extends React.Component {
   render() {
     return (
       <>
-        <p>It is Home Page!</p>
         <SearchBar />
+        <CardsList cards={cardsData} />
       </>
     );
   }
