@@ -1,0 +1,67 @@
+.SearchBar {
+  display: flex;
+  justify-content: center;
+}
+
+.SearchBar__label {
+  position: relative;
+}
+
+.SearchBar__input {
+  display: block;
+  width: 400px;
+  padding: 10px 0;
+  padding-left: 44px;
+  padding-right: 40px;
+
+  font-size: 20px;
+  color: #282c34;
+
+  border: 2px solid #282c34;
+  border-radius: 30px;
+
+  outline: none;
+
+  background-image: url('./assets/loupe.png');
+  background-repeat: no-repeat;
+  background-size: 32px;
+  background-position: 8px 8px;
+}
+
+.SearchBar__input:hover,
+.SearchBar__input:focus,
+.SearchBar__input:active {
+  border-color: #61dafb;
+}
+
+.SearchBar:hover .SearchBar__input,
+.SearchBar:focus .SearchBar__input,
+.SearchBar:active .SearchBar__input {
+  border-color: #61dafb;
+}
+
+.SearchBar__clear-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+
+  width: 34px;
+  height: 34px;
+  padding: 0;
+
+  border: none;
+  border-radius: 50%;
+
+  background-color: transparent;
+  background-image: url('./assets/clear-btn.png');
+  background-repeat: no-repeat;
+  background-size: 34px;
+
+  cursor: pointer;
+}
+
+.SearchBar__clear-btn:hover,
+.SearchBar__clear-btn:focus,
+.SearchBar__clear-btn:active {
+  outline: 1px solid #61dafb;
+}
