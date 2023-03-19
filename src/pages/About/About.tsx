@@ -2,7 +2,7 @@ import React from 'react';
 
 class About extends React.Component {
   render() {
-    return <p>It is About Page!</p>;
+    return <p className="bold-text">It is About Page!</p>;
   }
 }
 
