@@ -21,7 +21,7 @@ Deploy: [https://musmen-react-components.netlify.app/](https://musmen-react-comp
 ```
 
 ```sh
-3. Go to the project folder and run `npm install` (for installing dependencies) on the command line (in the terminal, for example)
+3. Go to the project folder, switch branch to the `react-components` (`git checkout react-components`) and run `npm install` (for installing dependencies) on the command line (in the terminal, for example)
 ```
 
 After successfully installing dependencies
@@ -31,7 +31,7 @@ After successfully installing dependencies
 On the command line, run `npm run ` and
 
 ```sh
-`dev` - start the project in development mode and hot debugging;
+`dev` - start the project in development mode and hot debugging (default local-host http://127.0.0.1:5173/);
 `build` - project build in production mode;
 `lint` - start checking esLint;
 `lint:fix` - run esLint check with automatic error correction if possible;
