@@ -1,10 +1,23 @@
 .Header {
-  display: flex;
-  align-items: center;
-  height: 50px;
+  min-height: 50px;
 
   font-size: 1rem;
   color: #ffffff;
 
   background-color: #282c34;
+}
+
+.Header__centralizer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.Header__wrapper {
+  flex-grow: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }

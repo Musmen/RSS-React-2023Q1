@@ -1,14 +1,9 @@
 .CardsList {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
 
 .CardsList__item {
-  margin-top: 20px;
-  margin-left: 20px;
-}
-
-.CardsList__item:first-of-type {
-  margin-left: 0;
+  margin: 5px;
 }

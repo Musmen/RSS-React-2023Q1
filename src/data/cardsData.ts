@@ -64,4 +64,11 @@ export const cardsData: CardType[] = [
     author: 'The Ninth John',
     date: '09.09.2009',
   },
+  {
+    id: '10',
+    title: 'Tenth Bird',
+    imgSrc: 'https://live.staticflickr.com//65535//49360363066_ff02bb6a73.jpg',
+    author: 'The Tenth John',
+    date: '10.10.2010',
+  },
 ];

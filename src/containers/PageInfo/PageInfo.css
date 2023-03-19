@@ -1,5 +1,12 @@
 .PageInfo {
-  min-width: 160px;
+  min-width: 150px;
 
-  margin-right: 10px;
+  margin: 10px;
+}
+
+@media (max-width: 700px) {
+  .PageInfo {
+    min-width: initial;
+    margin-right: 5px;
+  }
 }

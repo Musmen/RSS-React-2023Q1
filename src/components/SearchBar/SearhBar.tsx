@@ -28,7 +28,7 @@ class SearchBar extends React.Component<Record<string, never>, { searchValue: st
           <input
             className="SearchBar__input"
             name="SearchBar"
-            placeholder="Input your search request, please"
+            placeholder="Your search request"
             title="Input your search request, please"
             value={searchValue}
             onChange={this.onSearchValueChangeHandler}

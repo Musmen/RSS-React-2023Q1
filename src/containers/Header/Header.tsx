@@ -10,9 +10,13 @@ class Header extends React.Component {
   render() {
     return (
       <header className="Header">
-        <Logo />
-        <NavigationBar />
-        <PageInfo />
+        <div className="Header__centralizer centralizer">
+          <Logo />
+          <div className="Header__wrapper">
+            <NavigationBar />
+            <PageInfo />
+          </div>
+        </div>
       </header>
     );
   }

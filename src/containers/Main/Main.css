@@ -1,3 +1,6 @@
-Main {
-  min-height: calc(100vh - 96px);
+.Main__centralizer {
+  min-height: calc(100vh - 120px);
+  margin: 20px auto;
+
+  text-align: center;
 }
