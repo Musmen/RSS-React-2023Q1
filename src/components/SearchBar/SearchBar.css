@@ -34,12 +34,6 @@
   border-color: #61dafb;
 }
 
-.SearchBar:hover .SearchBar__input,
-.SearchBar:focus .SearchBar__input,
-.SearchBar:active .SearchBar__input {
-  border-color: #61dafb;
-}
-
 .SearchBar__clear-btn {
   position: absolute;
   top: 6px;

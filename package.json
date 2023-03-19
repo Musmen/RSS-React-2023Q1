@@ -1,14 +1,15 @@
 {
   "name": "rss-react-2023q1",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc --noEmit && vite build",
-    "preview": "vite preview",
+    "dev": "npm run pre-commit && vite",
+    "build": "npm run pre-commit && vite build",
     "lint": "eslint ./src --ext .js,.ts,.jsx,.tsx",
     "lint:fix": "eslint ./src --ext .js,.ts,.jsx,.tsx --fix --max-warnings=0",
+    "format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,scss}",
+    "pre-commit": "npm run lint:fix && npm run format",
     "test": "vitest",
     "test:coverage": "vitest run --coverage"
   },
