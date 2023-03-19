@@ -9,7 +9,7 @@
 
 .SearchBar__input {
   display: block;
-  width: 210px;
+  width: 300px;
   padding: 10px 0;
   padding-left: 44px;
   padding-right: 40px;
@@ -64,4 +64,16 @@
 .SearchBar__clear-btn:focus,
 .SearchBar__clear-btn:active {
   outline: 1px solid #61dafb;
+}
+
+@media (max-width: 800px) {
+  .SearchBar__input {
+    width: 260px;
+  }
+}
+
+@media (max-width: 500px) {
+  .SearchBar__input {
+    width: 210px;
+  }
 }
