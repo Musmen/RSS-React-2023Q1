@@ -1,0 +1,41 @@
+.Card {
+  width: 200px;
+  height: 240px;
+
+  color: white;
+
+  border-top-left-radius: 20px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 0;
+
+  background-color: #282c34;
+}
+
+.Card__title {
+  text-align: center;
+}
+
+.Card__title,
+.Card__author,
+.Card__date {
+  padding: 5px 0;
+}
+
+.Card__image {
+  width: 200px;
+  max-height: 100px;
+
+  object-fit: cover;
+}
+
+.Card__description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Card__label {
+  font-weight: bold;
+  color: #61dafb;
+}

@@ -1,0 +1,36 @@
+.logo {
+  display: flex;
+  align-items: center;
+
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.logo:hover {
+  color: #61dafb;
+}
+
+.logo__title {
+  margin: 0;
+
+  font-size: 22px;
+  line-height: 1.8rem;
+}
+
+.logo__img {
+  width: 36px;
+  height: 36px;
+}
+
+@media (max-width: 800px) {
+  .logo__title {
+    font-size: 18px;
+    line-height: 1.2rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .logo__title {
+    display: none;
+  }
+}

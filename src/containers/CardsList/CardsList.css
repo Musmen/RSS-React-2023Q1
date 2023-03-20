@@ -1,0 +1,9 @@
+.CardsList {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.CardsList__item {
+  margin: 5px;
+}
