@@ -8,6 +8,10 @@ export const PAGES_CONFIG = [
     path: '/about',
   },
   {
+    pageName: 'Form Page',
+    path: '/form',
+  },
+  {
     pageName: '404 Page',
     path: '*',
   },

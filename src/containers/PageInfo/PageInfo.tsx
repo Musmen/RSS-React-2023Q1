@@ -11,15 +11,14 @@ class PageInfo extends React.Component {
   render() {
     return (
       <p className="PageInfo">
-        <Routes>
-          {PAGES_CONFIG.map(({ pageName, path }) => (
-            <Route
-              path={path}
-              element={<span>{`${PAGE_INFO_PREFIX}${pageName}`}</span>}
-              key={`${path}-${pageName}`}
-            />
-          ))}
-        </Routes>
+        <span>
+          {PAGE_INFO_PREFIX}
+          <Routes>
+            {PAGES_CONFIG.map(({ pageName, path }) => (
+              <Route path={path} element={pageName} key={`${path}-${pageName}`} />
+            ))}
+          </Routes>
+        </span>
       </p>
     );
   }
