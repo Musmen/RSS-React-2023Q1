@@ -4,17 +4,18 @@ import React, { Component } from 'react';
 
 import Card from '../../components/Card/Card';
 
-import { CardType } from '../../models/card';
+import { BigCardType, CardType } from '../../models/card';
+import BigCard from '../../components/BigCard/BigCard';
 
-class CardsList extends Component<{ cards: CardType[] }> {
+class CardsList extends Component<{ cards: CardType[]; isBigCards?: boolean }> {
   render() {
-    const { cards } = this.props;
+    const { cards, isBigCards } = this.props;
 
     return (
       <ul className="CardsList list">
-        {cards.map((card: CardType) => (
+        {cards.map((card: CardType | BigCardType) => (
           <li className="CardsList__item" key={card.id}>
-            <Card card={card} />
+            {isBigCards ? <BigCard card={card} /> : <Card card={card} />}
           </li>
         ))}
       </ul>
