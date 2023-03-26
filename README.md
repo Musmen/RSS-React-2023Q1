@@ -8,6 +8,12 @@ Task link: [https://github.com/rolling-scopes-school/tasks/tree/master/react/mod
 
 Deploy: [https://musmen-react-components.netlify.app/](https://musmen-react-components.netlify.app/)
 
+## Task "React. Forms"
+
+Task link: [https://github.com/rolling-scopes-school/tasks/tree/master/react/modules/module02](https://github.com/rolling-scopes-school/tasks/tree/master/react/modules/module02)
+
+Deploy: [https://musmen-react-forms.netlify.app/](https://musmen-react-forms.netlify.app/)
+
 ### Brief instructions for installing and using the project
 
 #### **Installation:**
