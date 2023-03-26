@@ -12,11 +12,11 @@ export interface State {
 export const DEFAULT_STATE: State = {
   validationErrorsMessages: {
     author: '',
-    title: '',
+    imageTitle: '',
     date: '',
     responsibility: '',
     file: '',
-    type: '',
+    imageType: '',
     gender: '',
   },
 };

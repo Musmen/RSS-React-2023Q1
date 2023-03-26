@@ -1,6 +1,7 @@
 import './CardForm.css';
 
 import React, { Component, FormEvent } from 'react';
+import ToolTip from '../../components/ToolTip/ToolTip';
 
 import { getRangeValidationErrorMessage, getTodayDateISOString } from './CardForm.helpers';
 
@@ -17,58 +18,33 @@ class CardForm extends Component<Props, State> {
   state: State = { ...DEFAULT_STATE };
 
   form = React.createRef<HTMLFormElement>();
-  author = React.createRef<HTMLInputElement>();
-  title = React.createRef<HTMLInputElement>();
-  date = React.createRef<HTMLInputElement>();
-  type = React.createRef<HTMLSelectElement>();
-  responsibility = React.createRef<HTMLInputElement>();
-  genderMale = React.createRef<HTMLInputElement>();
-  genderFemale = React.createRef<HTMLInputElement>();
-  file = React.createRef<HTMLInputElement>();
-
-  formFieldsRefsToValidate = [
-    this.author,
-    this.title,
-    this.date,
-    this.responsibility,
-    this.file,
-    this.type,
-    this.genderMale,
-    this.genderFemale,
-  ];
 
   validityErrorHandler: React.FormEventHandler<HTMLInputElement | HTMLSelectElement> = (event) => {
     const { name } = event.currentTarget;
 
     if (event.currentTarget.validity.valueMissing) {
       this.setState((prevState) => ({
-        ...prevState,
         validationErrorsMessages: {
           ...prevState.validationErrorsMessages,
           [name]: VALIDATION_ERRORS_MESSAGES.REQUIRED,
         },
       }));
-
       return;
     }
 
     if (event.currentTarget.name === INPUT_DATE_FIELD_NAME) {
       this.setState((prevState) => ({
-        ...prevState,
         validationErrorsMessages: {
           ...prevState.validationErrorsMessages,
           [name]: VALIDATION_ERRORS_MESSAGES.DATE,
         },
       }));
-
       return;
     }
 
     const { minLength, maxLength } = event.currentTarget as HTMLInputElement;
     const rangeErrorMessage = getRangeValidationErrorMessage(minLength, maxLength);
-
     this.setState((prevState) => ({
-      ...prevState,
       validationErrorsMessages: {
         ...prevState.validationErrorsMessages,
         [name]: rangeErrorMessage,
@@ -77,34 +53,52 @@ class CardForm extends Component<Props, State> {
   };
 
   clearErrors = () => {
-    this.setState((prevState: State) => ({
-      ...prevState,
-      validationErrorsMessages: DEFAULT_STATE.validationErrorsMessages,
-    }));
+    this.setState({ validationErrorsMessages: DEFAULT_STATE.validationErrorsMessages });
   };
 
-  checkIsFormValid = () =>
-    !this.formFieldsRefsToValidate
-      .map((formFieldRef) => formFieldRef.current?.checkValidity())
-      .some((formFieldValidationResult) => !formFieldValidationResult);
+  checkIsFormValid = () => {
+    const { author, imageTitle, date, responsibility, file, imageType } = this.form.current!;
 
-  getCheckedGender = () =>
-    this.genderMale.current?.checked
-      ? this.genderMale.current?.value
-      : this.genderFemale.current?.value;
+    return [author, imageTitle, date, responsibility, file, imageType]
+      .map((formFieldRef) => formFieldRef.checkValidity())
+      .every((formFieldValidationResult) => formFieldValidationResult);
+  };
+
+  checkIsGenderValid = () => {
+    const [maleInput, femaleInput] = this.form.current?.gender;
+
+    if (!maleInput.checked && !femaleInput.checked) {
+      this.setState((prevState) => ({
+        validationErrorsMessages: {
+          ...prevState.validationErrorsMessages,
+          gender: VALIDATION_ERRORS_MESSAGES.REQUIRED,
+        },
+      }));
+      return false;
+    }
+
+    return true;
+  };
+
+  getCheckedGender = () => {
+    const [maleInput, femaleInput] = this.form.current?.gender;
+    return maleInput.checked ? maleInput.value : femaleInput.value;
+  };
 
   getNewCard: () => BigCardType = () => {
-    const imageFile = this.file?.current?.files && this.file.current.files[0];
+    const { file, author, imageTitle, date, imageType, responsibility } = this.form.current!;
+
+    const imageFile = file.files && file.files[0];
     const imageBlob = new Blob([imageFile || '']);
 
     return {
-      author: this.author.current?.value || '',
+      author: author.value || '',
       authorGender: this.getCheckedGender(),
-      title: this.title.current?.value || '',
-      date: this.date.current?.value || '',
-      type: this.type.current?.value || '',
+      title: imageTitle.value || '',
+      date: date.value || '',
+      type: imageType.value || '',
       imgSrc: URL.createObjectURL(imageBlob),
-      responsibility: Boolean(this.responsibility.current?.value) || false,
+      responsibility: Boolean(responsibility.value) || false,
     };
   };
 
@@ -114,13 +108,13 @@ class CardForm extends Component<Props, State> {
 
   cardFormSubmitHandler = (event: FormEvent) => {
     event.preventDefault();
-
-    const { addCard, showMessage } = this.props;
-
     this.clearErrors();
-    if (!this.checkIsFormValid()) return;
+
+    const isGenderValid = this.checkIsGenderValid();
+    if (!this.checkIsFormValid() || !isGenderValid) return;
 
     const newCard = this.getNewCard();
+    const { addCard, showMessage } = this.props;
     addCard(newCard);
     showMessage();
 
@@ -151,19 +145,19 @@ class CardForm extends Component<Props, State> {
                 Image title:
                 <input
                   className="CardForm-input title-input input"
-                  name="title"
+                  name="imageTitle"
                   type="text"
                   placeholder="Input title, please"
-                  ref={this.title}
                   onInvalid={validityErrorHandler}
                   minLength={3}
                   maxLength={20}
                   required
                 />
               </label>
-              <span className="CardForm-validation-error-message">
-                {validationErrorsMessages.title}
-              </span>
+              <ToolTip
+                className="CardForm-validation-error-message"
+                message={validationErrorsMessages.imageTitle}
+              />
             </div>
 
             <div className="CardForm-field input-container">
@@ -174,16 +168,16 @@ class CardForm extends Component<Props, State> {
                   name="author"
                   type="text"
                   placeholder="Input author name, please"
-                  ref={this.author}
                   onInvalid={validityErrorHandler}
                   minLength={3}
                   maxLength={20}
                   required
                 />
               </label>
-              <span className="CardForm-validation-error-message">
-                {validationErrorsMessages.author}
-              </span>
+              <ToolTip
+                className="CardForm-validation-error-message"
+                message={validationErrorsMessages.author}
+              />
             </div>
           </div>
 
@@ -195,15 +189,15 @@ class CardForm extends Component<Props, State> {
                   className="CardForm-input date-input input"
                   name="date"
                   type="date"
-                  ref={this.date}
                   onInvalid={validityErrorHandler}
                   max={today}
                   required
                 />
               </label>
-              <span className="CardForm-validation-error-message">
-                {validationErrorsMessages.date}
-              </span>
+              <ToolTip
+                className="CardForm-validation-error-message"
+                message={validationErrorsMessages.date}
+              />
             </div>
 
             <div className="CardForm-field select-container">
@@ -211,9 +205,8 @@ class CardForm extends Component<Props, State> {
                 Image type:
                 <select
                   className="CardForm-select type-select select"
-                  name="type"
+                  name="imageType"
                   defaultValue=""
-                  ref={this.type}
                   onInvalid={validityErrorHandler}
                   required
                 >
@@ -231,30 +224,29 @@ class CardForm extends Component<Props, State> {
                   ))}
                 </select>
               </label>
-              <span className="CardForm-validation-error-message">
-                {validationErrorsMessages.type}
-              </span>
+              <ToolTip
+                className="CardForm-validation-error-message"
+                message={validationErrorsMessages.imageType}
+              />
             </div>
           </div>
 
           <div className="form-two-columns-container">
             <div className="CardForm-field input-container CardForm-field__responsibility">
-              <div className="CardForm-container__responsibility">
-                <label className="CardForm-label input-label">
-                  <span>Do you agree with responsibility?:</span>
-                  <input
-                    className="CardForm-checkbox responsibility-checkbox"
-                    name="responsibility"
-                    type="checkbox"
-                    ref={this.responsibility}
-                    onInvalid={validityErrorHandler}
-                    required
-                  />
-                </label>
-              </div>
-              <span className="CardForm-validation-error-message">
-                {validationErrorsMessages.responsibility}
-              </span>
+              <label className="CardForm-label input-label">
+                <span>Do you agree with responsibility?:</span>
+                <input
+                  className="CardForm-checkbox responsibility-checkbox"
+                  name="responsibility"
+                  type="checkbox"
+                  onInvalid={validityErrorHandler}
+                  required
+                />
+              </label>
+              <ToolTip
+                className="CardForm-validation-error-message"
+                message={validationErrorsMessages.responsibility}
+              />
             </div>
 
             <div className="CardForm-field CardForm-field__gender">
@@ -265,9 +257,7 @@ class CardForm extends Component<Props, State> {
                   id="male"
                   name="gender"
                   type="radio"
-                  ref={this.genderMale}
                   value="male"
-                  onInvalid={validityErrorHandler}
                   required
                 />
                 <label className="switcher__label" htmlFor="male">
@@ -278,18 +268,17 @@ class CardForm extends Component<Props, State> {
                   id="female"
                   name="gender"
                   type="radio"
-                  ref={this.genderFemale}
                   value="female"
-                  onInvalid={validityErrorHandler}
                   required
                 />
                 <label className="switcher__label" htmlFor="female">
                   female
                 </label>
               </div>
-              <span className="CardForm-validation-error-message">
-                {validationErrorsMessages.gender}
-              </span>
+              <ToolTip
+                className="CardForm-validation-error-message"
+                message={validationErrorsMessages.gender}
+              />
             </div>
           </div>
 
@@ -302,15 +291,15 @@ class CardForm extends Component<Props, State> {
                   name="file"
                   type="file"
                   accept=".jpg, .jpeg, .png"
-                  ref={this.file}
                   onInvalid={validityErrorHandler}
                   required
                 />
               </label>
             </div>
-            <span className="CardForm-validation-error-message">
-              {validationErrorsMessages.file}
-            </span>
+            <ToolTip
+              className="CardForm-validation-error-message"
+              message={validationErrorsMessages.file}
+            />
           </div>
         </fieldset>
 
