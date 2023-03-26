@@ -1,0 +1,22 @@
+.Message__layout {
+  position: absolute;
+  top: -10px;
+
+  width: 100%;
+}
+
+.Message__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 360px;
+  height: 40px;
+  margin: 0 auto;
+
+  border-radius: 10px;
+
+  font-weight: bold;
+  color: #282c34;
+
+  background-color: #61dafb;
+}

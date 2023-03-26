@@ -1,0 +1,18 @@
+.NavigationBar {
+  flex-grow: 2;
+}
+
+.NavigationBar__list {
+  display: flex;
+  justify-content: center;
+}
+
+.NavigationBar__item {
+  margin-right: 20px;
+}
+
+@media (max-width: 700px) {
+  .NavigationBar__item {
+    margin-right: 5px;
+  }
+}

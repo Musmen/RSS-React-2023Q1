@@ -1,0 +1,64 @@
+.switcher {
+  display: flex;
+  flex-direction: row;
+
+  font-size: 14px;
+}
+
+.switcher__legend {
+  margin-right: 5px;
+  padding-top: 2px;
+}
+
+.switcher .switcher__input {
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: -9999px;
+}
+
+.switcher .switcher__input + .switcher__label {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+  margin: 0;
+  padding: 2px 5px;
+
+  border: solid 1px #ddd;
+  background-color: #282c34;
+
+  color: white;
+  font-size: 0.8rem;
+  line-height: 140%;
+  font-weight: 600;
+  text-align: center;
+
+  box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+  transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out,
+    box-shadow 0.15s ease-out;
+}
+
+.switcher .switcher__input + .switcher__label:first-of-type {
+  border-radius: 6px 0 0 6px;
+}
+
+.switcher .switcher__input + .switcher__label:last-of-type {
+  border-radius: 0 6px 6px 0;
+}
+
+.switcher .switcher__input:hover + .switcher__label {
+  color: #61dafb;
+
+  border-color: #61dafb;
+}
+
+.switcher .switcher__input:checked + .switcher__label {
+  color: #282c34;
+
+  border-color: #61dafb;
+
+  background-color: #61dafb;
+
+  box-shadow: 0 0 10px rgba(102, 179, 251, 0.5);
+  z-index: 1;
+}

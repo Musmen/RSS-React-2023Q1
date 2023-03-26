@@ -1,0 +1,60 @@
+.Card {
+  width: 200px;
+  height: 240px;
+
+  color: white;
+
+  border-top-left-radius: 20px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 0;
+
+  background-color: #282c34;
+}
+
+.Card__wrapper {
+  padding: 5px 0;
+}
+
+.Card__wrapper_title {
+  padding-top: 7px;
+  text-align: center;
+}
+
+.Card__wrapper_title,
+.Card__wrapper_author {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.Card__title,
+.Card__author {
+  display: inline-block;
+  max-width: 130px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.Card__image {
+  width: 200px;
+  max-height: 100px;
+
+  object-fit: cover;
+}
+
+.Card__description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Card__label {
+  margin-right: 3px;
+
+  font-weight: bold;
+  color: #61dafb;
+}

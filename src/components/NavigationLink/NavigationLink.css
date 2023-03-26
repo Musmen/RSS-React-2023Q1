@@ -1,0 +1,20 @@
+.NavigationLink {
+  display: block;
+  padding: 5px;
+
+  color: white;
+  line-height: 40px;
+
+  text-decoration: none;
+}
+
+.NavigationLink_active {
+  color: #61dafb;
+  text-decoration: underline;
+}
+
+.NavigationLink:hover {
+  color: black;
+
+  background-color: #61dafb;
+}

@@ -1,0 +1,65 @@
+.input-container:hover .input,
+.select-container:hover .input,
+.input-container:hover .select,
+.select-container:hover .select {
+  border-color: #61dafb;
+}
+
+.input-label,
+.select-label {
+  padding-bottom: 5px;
+
+  font-size: 14px;
+}
+
+.input,
+.select {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  padding: 5px;
+  font-size: 14px;
+  color: #282c34;
+  border: 2px solid #282c34;
+  border-radius: 10px;
+  outline: none;
+}
+
+.input:focus,
+.select:focus {
+  border-color: #61dafb;
+}
+
+.form-button {
+  width: 100px;
+  height: 34px;
+  margin-top: 5px;
+  padding: 0;
+  color: #282c34;
+  text-transform: capitalize;
+  border: 1px solid white;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.form-button:disabled {
+  color: white;
+  background-color: #282c34;
+  opacity: 0.7;
+}
+
+.form-button:disabled:hover,
+.form-button:disabled:focus,
+.form-button:disabled:active {
+  border-color: white;
+  outline: none;
+  cursor: initial;
+}
+
+.form-button:hover,
+.form-button:focus,
+.form-button:active {
+  border-color: #61dafb;
+  outline: 2px solid #61dafb;
+  cursor: pointer;
+}
