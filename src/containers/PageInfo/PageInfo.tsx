@@ -1,13 +1,13 @@
 import './PageInfo.css';
 
-import React from 'react';
+import React, { Component } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { PAGES_CONFIG } from '../../common/constants';
 
 const PAGE_INFO_PREFIX = 'Current: ';
 
-class PageInfo extends React.Component {
+class PageInfo extends Component {
   render() {
     return (
       <p className="PageInfo">

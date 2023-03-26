@@ -1,13 +1,13 @@
 import './SearchBar.css';
 
-import React, { ChangeEvent, FormEvent } from 'react';
+import React, { Component, ChangeEvent, FormEvent } from 'react';
 
 import localStorageService from '../../services/local-storage.service';
 import { LOCAL_STORAGE_KEYS } from '../../common/constants';
 
 const DEFAULT_SEARCH_VALUE = '';
 
-class SearchBar extends React.Component<Record<string, never>, { searchValue: string }> {
+class SearchBar extends Component<Record<string, never>, { searchValue: string }> {
   state = {
     searchValue:
       localStorageService.getFromLS(LOCAL_STORAGE_KEYS.SEARCH_VALUE) || DEFAULT_SEARCH_VALUE,
