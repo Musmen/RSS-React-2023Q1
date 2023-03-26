@@ -12,14 +12,31 @@
   background-color: #282c34;
 }
 
-.Card__title {
+.Card__wrapper {
+  padding: 5px 0;
+}
+
+.Card__wrapper_title {
+  padding-top: 7px;
   text-align: center;
 }
 
+.Card__wrapper_title,
+.Card__wrapper_author {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .Card__title,
-.Card__author,
-.Card__date {
-  padding: 5px 0;
+.Card__author {
+  display: inline-block;
+  max-width: 130px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .Card__image {
@@ -36,6 +53,8 @@
 }
 
 .Card__label {
+  margin-right: 3px;
+
   font-weight: bold;
   color: #61dafb;
 }
