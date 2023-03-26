@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 
 import Card from '../../components/Card/Card';
 
-import { DEFAULT_BIG_CARD_ADDITIONAL_FIELDS } from './BiCard.constants';
+import { DEFAULT_BIG_CARD_ADDITIONAL_FIELDS } from './BigCard.constants';
 
 import { BigCardType } from '../../models/card';
 
