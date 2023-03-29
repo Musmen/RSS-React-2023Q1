@@ -19,37 +19,31 @@ class CardForm extends Component<Props, State> {
 
   form = React.createRef<HTMLFormElement>();
 
+  private updateValidationErrorMessageState(name: string, errorMessage: string) {
+    this.setState((prevState) => ({
+      validationErrorsMessages: {
+        ...prevState.validationErrorsMessages,
+        [name]: errorMessage,
+      },
+    }));
+  }
+
   validityErrorHandler: React.FormEventHandler<HTMLInputElement | HTMLSelectElement> = (event) => {
     const { name } = event.currentTarget;
 
     if (event.currentTarget.validity.valueMissing) {
-      this.setState((prevState) => ({
-        validationErrorsMessages: {
-          ...prevState.validationErrorsMessages,
-          [name]: VALIDATION_ERRORS_MESSAGES.REQUIRED,
-        },
-      }));
+      this.updateValidationErrorMessageState(name, VALIDATION_ERRORS_MESSAGES.REQUIRED);
       return;
     }
 
     if (event.currentTarget.name === INPUT_DATE_FIELD_NAME) {
-      this.setState((prevState) => ({
-        validationErrorsMessages: {
-          ...prevState.validationErrorsMessages,
-          [name]: VALIDATION_ERRORS_MESSAGES.DATE,
-        },
-      }));
+      this.updateValidationErrorMessageState(name, VALIDATION_ERRORS_MESSAGES.DATE);
       return;
     }
 
     const { minLength, maxLength } = event.currentTarget as HTMLInputElement;
     const rangeErrorMessage = getRangeValidationErrorMessage(minLength, maxLength);
-    this.setState((prevState) => ({
-      validationErrorsMessages: {
-        ...prevState.validationErrorsMessages,
-        [name]: rangeErrorMessage,
-      },
-    }));
+    this.updateValidationErrorMessageState(name, rangeErrorMessage);
   };
 
   clearErrors = () => {
