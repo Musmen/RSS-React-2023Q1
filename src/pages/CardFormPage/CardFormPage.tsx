@@ -7,7 +7,7 @@ import Message from '../../components/Message/Message';
 import {
   MESSAGE_VISIBILITY_DELAY_IN_MS,
   SUCCESS_CARD_CREATION_MESSAGE,
-  DEFAULT_STATE,
+  CARD_FORM_PAGE_DEFAULT_STATE,
 } from './CardFormPage.constants';
 
 import { BigCardType, CardType } from '../../models/card';
@@ -15,9 +15,14 @@ import { BigCardType, CardType } from '../../models/card';
 function CardFormPage() {
   const messageVisibilityTimer = useRef<NodeJS.Timeout | null>(null);
 
-  const [cards, setCards] = useState<(CardType | BigCardType)[]>(DEFAULT_STATE.cards);
+  const [cards, setCards] = useState<(CardType | BigCardType)[]>(
+    CARD_FORM_PAGE_DEFAULT_STATE.cards
+  );
 
-  const [isMessageVisible, setIsMessageVisible] = useState<boolean>(DEFAULT_STATE.isMessageVisible);
+  const [isMessageVisible, setIsMessageVisible] = useState<boolean>(
+    CARD_FORM_PAGE_DEFAULT_STATE.isMessageVisible
+  );
+
   const showMessage = useCallback(() => setIsMessageVisible(true), []);
   const hideMessage = useCallback(() => setIsMessageVisible(false), []);
 

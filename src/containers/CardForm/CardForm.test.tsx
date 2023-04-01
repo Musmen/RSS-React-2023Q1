@@ -8,7 +8,7 @@ describe('Start CardForm testing', () => {
   let cardFormElement: HTMLElement;
 
   beforeEach(() => {
-    render(<CardForm addCard={() => {}} showMessage={() => {}} />);
+    render(<CardForm addCard={() => {}} renderMessage={() => {}} />);
     cardFormElement = screen.getByRole('form');
   });
 
@@ -29,8 +29,8 @@ describe('Start CardForm testing', () => {
   it('renders image type select', () => {
     expect(screen.getByText(/image type:/i)).toBeInTheDocument();
 
-    TYPE_SELECT_OPTIONS.forEach(({ value }) => {
-      expect(screen.getByText(value)).toBeInTheDocument();
+    TYPE_SELECT_OPTIONS.forEach(({ description }) => {
+      expect(screen.getByText(description)).toBeInTheDocument();
     });
   });
 
