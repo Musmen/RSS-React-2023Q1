@@ -1,6 +1,6 @@
 import './SearchBar.css';
 
-import React, { ChangeEvent, FormEvent, useState, useEffect, useCallback } from 'react';
+import React, { ChangeEvent, FormEvent, useState, useEffect, useCallback, useRef } from 'react';
 
 import localStorageService from '../../services/local-storage.service';
 import { LOCAL_STORAGE_KEYS } from '../../common/constants';
@@ -9,21 +9,30 @@ const DEFAULT_SEARCH_VALUE = '';
 
 function SearchBar() {
   const searchValueFromLS = localStorageService.getFromLS(LOCAL_STORAGE_KEYS.SEARCH_VALUE);
+
   const [searchValue, setSearchValue] = useState<string>(searchValueFromLS || DEFAULT_SEARCH_VALUE);
 
+  const searchValueRef = useRef<string>();
+
   useEffect(() => {
-    localStorageService.setToLS(searchValue, LOCAL_STORAGE_KEYS.SEARCH_VALUE);
+    searchValueRef.current = searchValue;
   }, [searchValue]);
+
+  useEffect(() => {
+    return () =>
+      localStorageService.setToLS(
+        searchValueRef.current || DEFAULT_SEARCH_VALUE,
+        LOCAL_STORAGE_KEYS.SEARCH_VALUE
+      );
+  }, []);
 
   const onClearBtnClickHandler = useCallback(() => {
     setSearchValue(DEFAULT_SEARCH_VALUE);
-    localStorageService.deleteFromLS(LOCAL_STORAGE_KEYS.SEARCH_VALUE);
   }, []);
 
   const onSearchValueChangeHandler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     const newSearchValue: string = event.target.value;
     setSearchValue(newSearchValue);
-    localStorageService.setToLS(newSearchValue, LOCAL_STORAGE_KEYS.SEARCH_VALUE);
   }, []);
 
   const onSubmitHandler = useCallback((event: FormEvent) => {
