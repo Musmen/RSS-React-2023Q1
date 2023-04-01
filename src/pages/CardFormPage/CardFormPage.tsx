@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import CardForm from '../../containers/CardForm/CardForm';
 import CardsList from '../../containers/CardsList/CardsList';
@@ -7,47 +7,49 @@ import Message from '../../components/Message/Message';
 import {
   MESSAGE_VISIBILITY_DELAY_IN_MS,
   SUCCESS_CARD_CREATION_MESSAGE,
+  DEFAULT_STATE,
 } from './CardFormPage.constants';
 
 import { BigCardType, CardType } from '../../models/card';
-import { DEFAULT_STATE, State } from './CardFormPage.models';
 
-class CardFormPage extends Component<Record<string, never>, State> {
-  messageVisibilityTimer: NodeJS.Timeout | null = null;
+function CardFormPage() {
+  const messageVisibilityTimer = useRef<NodeJS.Timeout | null>(null);
 
-  state: State = DEFAULT_STATE;
+  const [cards, setCards] = useState<(CardType | BigCardType)[]>(DEFAULT_STATE.cards);
 
-  addCard = (card: CardType | BigCardType) => {
-    const newCardId = String(this.state.cards.length);
-    const newCard: CardType | BigCardType = { ...card, id: newCardId };
-    this.setState((prevState: State) => ({ cards: [...prevState.cards, newCard] }));
-  };
+  const [isMessageVisible, setIsMessageVisible] = useState<boolean>(DEFAULT_STATE.isMessageVisible);
+  const showMessage = useCallback(() => setIsMessageVisible(true), []);
+  const hideMessage = useCallback(() => setIsMessageVisible(false), []);
 
-  showMessage = () => {
-    this.setState({ isMessageVisible: true });
+  useEffect(() => {
+    const timerId = messageVisibilityTimer.current;
 
-    this.messageVisibilityTimer = setTimeout(
-      () => this.setState({ isMessageVisible: false }),
-      MESSAGE_VISIBILITY_DELAY_IN_MS
-    );
-  };
+    return () => {
+      timerId && clearTimeout(timerId);
+    };
+  }, [messageVisibilityTimer]);
 
-  componentWillUnmount() {
-    this.messageVisibilityTimer && clearTimeout(this.messageVisibilityTimer);
-  }
+  const addCard = useCallback(
+    (card: CardType | BigCardType) => {
+      const newCardId = String(cards.length);
+      const newCard: CardType | BigCardType = { ...card, id: newCardId };
+      setCards([...cards, newCard]);
+    },
+    [cards]
+  );
 
-  render() {
-    const { addCard, showMessage } = this;
-    const { cards, isMessageVisible } = this.state;
+  const renderMessage = useCallback(() => {
+    showMessage();
+    messageVisibilityTimer.current = setTimeout(hideMessage, MESSAGE_VISIBILITY_DELAY_IN_MS);
+  }, [showMessage, hideMessage]);
 
-    return (
-      <>
-        <CardForm addCard={addCard} showMessage={showMessage} />
-        <CardsList cards={cards} isBigCards={true} />
-        {isMessageVisible && <Message message={SUCCESS_CARD_CREATION_MESSAGE} />}
-      </>
-    );
-  }
+  return (
+    <>
+      <CardForm addCard={addCard} renderMessage={renderMessage} />
+      <CardsList cards={cards} isBigCards={true} />
+      {isMessageVisible && <Message message={SUCCESS_CARD_CREATION_MESSAGE} />}
+    </>
+  );
 }
 
 export default CardFormPage;

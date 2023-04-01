@@ -108,9 +108,9 @@ class CardForm extends Component<Props, State> {
     if (!this.checkIsFormValid() || !isGenderValid) return;
 
     const newCard = this.getNewCard();
-    const { addCard, showMessage } = this.props;
+    const { addCard, renderMessage } = this.props;
     addCard(newCard);
-    showMessage();
+    renderMessage();
 
     this.form.current?.reset();
     this.resetForm();
