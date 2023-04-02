@@ -14,6 +14,12 @@ Task link: [https://github.com/rolling-scopes-school/tasks/tree/master/react/mod
 
 Deploy: [https://musmen-react-forms.netlify.app/](https://musmen-react-forms.netlify.app/)
 
+## Task "React. Hooks"
+
+Task link: [https://github.com/rolling-scopes-school/tasks/tree/master/react/modules/module03](https://github.com/rolling-scopes-school/tasks/tree/master/react/modules/module03)
+
+Deploy: [https://musmen-react-hooks.netlify.app/](https://musmen-react-hooks.netlify.app/)
+
 ### Brief instructions for installing and using the project
 
 #### **Installation:**
