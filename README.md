@@ -33,7 +33,7 @@ Deploy: [https://musmen-react-hooks.netlify.app/](https://musmen-react-hooks.net
 ```
 
 ```sh
-3. Go to the project folder, switch branch to the `react-components` (`git checkout react-components`) and run `npm install` (for installing dependencies) on the command line (in the terminal, for example)
+3. Go to the project folder, switch branch to the `react-hooks` (`git checkout react-hooks`) and run `npm install` (for installing dependencies) on the command line (in the terminal, for example)
 ```
 
 After successfully installing dependencies
