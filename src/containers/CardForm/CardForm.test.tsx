@@ -111,8 +111,10 @@ describe('Start CardForm testing', () => {
 
     expect(mockedAddCard).not.toHaveBeenCalled();
     expect(mockedRenderMessage).not.toHaveBeenCalled();
+
     expect(screen.getByText(VALIDATION_ERRORS_MESSAGES.REQUIRED)).toBeInTheDocument();
     expect(screen.getAllByText(VALIDATION_ERRORS_MESSAGES.REQUIRED).length).toEqual(1);
+
     expect(screen.queryByText(VALIDATION_ERRORS_MESSAGES.DATE)).not.toBeInTheDocument();
     expect(screen.queryByText(VALIDATION_ERRORS_MESSAGES.LENGTH)).not.toBeInTheDocument();
   });
