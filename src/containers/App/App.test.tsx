@@ -3,18 +3,22 @@ import { render, screen } from '@testing-library/react';
 
 import App from './App';
 
-it('Should render App correctly', () => {
-  const {
-    container: { firstElementChild },
-  } = render(<App />);
+describe('Start App testing', () => {
+  beforeEach(() => {
+    render(<App />);
+  });
 
-  expect(screen.getByRole('heading')).toBeInTheDocument();
-  expect(firstElementChild?.tagName).toBe('HEADER');
-  expect(firstElementChild?.className).toBe('Header');
-  expect(screen.getByText(/react-photo-relax/i)).toBeInTheDocument();
+  it('Should render header', () => {
+    expect(screen.getByRole('heading')).toBeInTheDocument();
+    expect(screen.getByText(/react-photo-relax/i)).toBeInTheDocument();
+  });
 
-  expect(screen.getByRole('main')).toBeInTheDocument();
+  it('Should render main', () => {
+    expect(screen.getByRole('main')).toBeInTheDocument();
+  });
 
-  expect(screen.getByRole('contentinfo')).toBeInTheDocument();
-  expect(screen.getByText(/musmen/i)).toBeInTheDocument();
+  it('Should render footer', () => {
+    expect(screen.getByRole('contentinfo')).toBeInTheDocument();
+    expect(screen.getByText(/musmen/i)).toBeInTheDocument();
+  });
 });

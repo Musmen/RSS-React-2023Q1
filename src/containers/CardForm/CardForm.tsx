@@ -69,6 +69,7 @@ function CardForm(props: CardFormProps) {
         <div className="form-two-columns-container">
           <CardFormFieldWrapper label="Image creation date:" errorMessage={errors.date?.message}>
             <input
+              data-testid="date-input"
               className="CardForm-input date-input input"
               type="date"
               max={getTodayDateISOString()}
@@ -102,6 +103,7 @@ function CardForm(props: CardFormProps) {
           <CardFormFieldWrapper errorMessage={errors.responsibility?.message}>
             <span>Do you agree with responsibility?:</span>
             <input
+              data-testid="responsibility-checkbox"
               className="CardForm-checkbox responsibility-checkbox"
               type="checkbox"
               {...register('responsibility', INPUT_OPTIONS.REQUIRED)}
@@ -142,6 +144,7 @@ function CardForm(props: CardFormProps) {
         >
           <span>Upload this image:</span>
           <input
+            data-testid="file-input"
             className="CardForm-input file-input input"
             type="file"
             accept=".jpg, .jpeg, .png"
