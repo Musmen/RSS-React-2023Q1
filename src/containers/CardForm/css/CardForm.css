@@ -14,13 +14,8 @@
   background-color: #282c34;
 }
 
-.CardForm .input-label,
-.CardForm .select-label {
+.CardForm-label {
   padding-bottom: 0;
-}
-
-.CardForm-validation-error-message {
-  padding-bottom: 5px;
 }
 
 .CardForm-fieldset {
@@ -34,29 +29,19 @@
 .CardForm-field {
   display: flex;
   flex-direction: column;
-}
-
-.CardForm-field__gender,
-.CardForm-field__responsibility,
-.CardForm-container__file {
   user-select: none;
 }
 
-.CardForm-field__gender:hover label:hover,
-.CardForm-field__responsibility:hover label:hover,
-.CardForm-field__gender:hover input:hover,
-.CardForm-field__responsibility:hover input:hover {
+.CardForm-field:hover label:hover {
   cursor: pointer;
+}
+
+.CardForm-field:hover label:hover.initial-cursor {
+  cursor: initial;
 }
 
 .CardForm-field__responsibility:hover input[type='checkbox'] {
   outline: 1px solid #61dafb;
-}
-
-.CardForm-field__responsibility,
-.CardForm-container__file {
-  display: flex;
-  align-items: center;
 }
 
 .CardForm-label_file {
@@ -71,11 +56,6 @@
   margin-left: 10px;
 
   color: white;
-}
-
-.CardForm-validation-error-message {
-  min-height: 22px;
-  color: #ff0000;
 }
 
 .form-two-columns-container {

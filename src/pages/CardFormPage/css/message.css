@@ -1,16 +1,16 @@
-.Message__layout {
+.success-message__layout {
   position: absolute;
-  top: -10px;
+  top: -12px;
 
   width: 100%;
 }
 
-.Message__content {
+.success-message__content {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 360px;
-  height: 40px;
+  width: 430px;
+  height: 50px;
   margin: 0 auto;
 
   border-radius: 10px;

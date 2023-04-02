@@ -1,22 +1,26 @@
 import { CardType } from '../../models/card';
 
-export interface Props {
+export interface CardFormProps {
   addCard: (card: CardType) => void;
-  showMessage: () => void;
+  renderMessage: () => void;
 }
 
-export interface State {
-  validationErrorsMessages: { [key: string]: string };
+export interface CardFormState {
+  author: string;
+  imageTitle: string;
+  date: string;
+  responsibility: boolean;
+  file: FileList;
+  imageType: string;
+  gender: string;
 }
 
-export const DEFAULT_STATE: State = {
-  validationErrorsMessages: {
-    author: '',
-    imageTitle: '',
-    date: '',
-    responsibility: '',
-    file: '',
-    imageType: '',
-    gender: '',
-  },
+export const DEFAULT_STATE: CardFormState = {
+  author: '',
+  imageTitle: '',
+  date: '',
+  responsibility: false,
+  file: {} as FileList,
+  imageType: '',
+  gender: '',
 };

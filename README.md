@@ -14,6 +14,12 @@ Task link: [https://github.com/rolling-scopes-school/tasks/tree/master/react/mod
 
 Deploy: [https://musmen-react-forms.netlify.app/](https://musmen-react-forms.netlify.app/)
 
+## Task "React. Hooks"
+
+Task link: [https://github.com/rolling-scopes-school/tasks/tree/master/react/modules/module03](https://github.com/rolling-scopes-school/tasks/tree/master/react/modules/module03)
+
+Deploy: [https://musmen-react-hooks.netlify.app/](https://musmen-react-hooks.netlify.app/)
+
 ### Brief instructions for installing and using the project
 
 #### **Installation:**
@@ -27,7 +33,7 @@ Deploy: [https://musmen-react-forms.netlify.app/](https://musmen-react-forms.net
 ```
 
 ```sh
-3. Go to the project folder, switch branch to the `react-components` (`git checkout react-components`) and run `npm install` (for installing dependencies) on the command line (in the terminal, for example)
+3. Go to the project folder, switch branch to the `react-hooks` (`git checkout react-hooks`) and run `npm install` (for installing dependencies) on the command line (in the terminal, for example)
 ```
 
 After successfully installing dependencies

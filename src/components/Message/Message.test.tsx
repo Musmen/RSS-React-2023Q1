@@ -10,7 +10,7 @@ describe('Start Message testing', () => {
       container: { firstElementChild },
     } = render(<Message message={testMessage} />);
 
-    expect(firstElementChild?.tagName).toBe('DIV');
+    expect(firstElementChild?.tagName).toBe('P');
 
     const message = screen.getByText(testMessage);
     expect(message).toBeInTheDocument();

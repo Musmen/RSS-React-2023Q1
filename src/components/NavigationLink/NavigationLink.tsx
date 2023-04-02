@@ -9,21 +9,17 @@ const activeNavLinkClassName = `${baseNavLinkClassName} ${baseNavLinkClassName}_
 const getNavLinkClassName = ({ isActive }: { isActive: boolean }) =>
   isActive ? activeNavLinkClassName : baseNavLinkClassName;
 
-interface Props {
+interface NavigationLinkProps {
   pageName: string;
   to: string;
 }
 
-class NavigationLink extends React.Component<Readonly<Props>> {
-  render() {
-    const { pageName, to } = this.props;
-
-    return (
-      <NavLink className={getNavLinkClassName} to={to}>
-        {pageName}
-      </NavLink>
-    );
-  }
+function NavigationLink({ pageName, to }: NavigationLinkProps) {
+  return (
+    <NavLink className={getNavLinkClassName} to={to}>
+      {pageName}
+    </NavLink>
+  );
 }
 
 export default NavigationLink;

@@ -6,20 +6,18 @@ import NavigationLink from '../../components/NavigationLink/NavigationLink';
 
 import { PAGES_CONFIG } from '../../common/constants';
 
-class NavigationBar extends React.Component {
-  render() {
-    return (
-      <nav className="NavigationBar">
-        <ul className="NavigationBar__list list">
-          {PAGES_CONFIG.map(({ pageName, path }) => (
-            <li className="NavigationBar__item" key={`${pageName}-${path}`}>
-              <NavigationLink pageName={pageName} to={path} />
-            </li>
-          ))}
-        </ul>
-      </nav>
-    );
-  }
+function NavigationBar() {
+  return (
+    <nav className="NavigationBar">
+      <ul className="NavigationBar__list list">
+        {PAGES_CONFIG.map(({ pageName, path }) => (
+          <li className="NavigationBar__item" key={`${pageName}-${path}`}>
+            <NavigationLink pageName={pageName} to={path} />
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
 }
 
 export default NavigationBar;
