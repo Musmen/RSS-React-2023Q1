@@ -1,3 +1,5 @@
+import { getTodayDateISOString } from './CardForm.helpers';
+
 export const TYPE_SELECT_OPTIONS = [
   { value: '', description: 'Select image type' },
   { value: 'photo', description: 'photo' },
@@ -27,4 +29,26 @@ export const VALIDATION_ERRORS_MESSAGES = {
   REQUIRED: 'The field is required!',
   DATE: 'Date cannot be in the future!',
   LENGTH: getLengthValidationErrorMessage(),
+};
+
+export const INPUT_OPTIONS = {
+  WITH_LENGTH_LIMITS: {
+    required: VALIDATION_ERRORS_MESSAGES.REQUIRED,
+    minLength: {
+      value: INPUT_VALUE_LENGTH.MIN,
+      message: VALIDATION_ERRORS_MESSAGES.LENGTH,
+    },
+    maxLength: {
+      value: INPUT_VALUE_LENGTH.MAX,
+      message: VALIDATION_ERRORS_MESSAGES.LENGTH,
+    },
+  },
+  DATE: {
+    required: VALIDATION_ERRORS_MESSAGES.REQUIRED,
+    max: {
+      value: getTodayDateISOString(),
+      message: VALIDATION_ERRORS_MESSAGES.DATE,
+    },
+  },
+  REQUIRED: { required: VALIDATION_ERRORS_MESSAGES.REQUIRED },
 };

@@ -1,11 +1,14 @@
 import { CardFormState } from './CardForm.models';
 import { BigCardType } from '../../models/card';
 
-export const getTodayDateISOString = () => new Date().toISOString().split('T')[0];
+type GetTodayDateISOStringType = () => string;
 
-type getNewCardType = (cardFormData: CardFormState) => BigCardType;
+export const getTodayDateISOString: GetTodayDateISOStringType = () =>
+  new Date().toISOString().split('T')[0];
 
-export const getNewCard: getNewCardType = (cardFormData: CardFormState) => {
+type GetNewCardType = (cardFormData: CardFormState) => BigCardType;
+
+export const getNewCard: GetNewCardType = (cardFormData: CardFormState) => {
   const { author, gender, imageTitle, date, imageType, responsibility, file } = cardFormData;
 
   const imageFile = file[0];

@@ -1,12 +1,9 @@
-.input-container:hover .input,
-.select-container:hover .input,
-.input-container:hover .select,
-.select-container:hover .select {
+.field-container:hover .input:hover,
+.field-container:hover .select:hover {
   border-color: #61dafb;
 }
 
-.input-label,
-.select-label {
+label {
   padding-bottom: 5px;
 
   font-size: 14px;
@@ -23,6 +20,10 @@
   border: 2px solid #282c34;
   border-radius: 10px;
   outline: none;
+}
+
+.select {
+  cursor: pointer;
 }
 
 .input:focus,

@@ -1,19 +1,13 @@
-import './CardForm.css';
+import './css/CardForm.css';
 
 import React, { useCallback, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import ToolTip from '../../components/ToolTip/ToolTip';
+import CardFormFieldWrapper from './CardFormFieldWrapper/CardFormFieldWrapper';
 
 import { getNewCard, getTodayDateISOString } from './CardForm.helpers';
-const today = getTodayDateISOString();
-
-import {
-  INPUT_VALUE_LENGTH,
-  TYPE_SELECT_OPTIONS,
-  VALIDATION_ERRORS_MESSAGES,
-} from './CardForm.constants';
-
+import { INPUT_OPTIONS, TYPE_SELECT_OPTIONS } from './CardForm.constants';
 import { DEFAULT_STATE, CardFormProps, CardFormState } from './CardForm.models';
 
 function CardForm(props: CardFormProps) {
@@ -47,126 +41,72 @@ function CardForm(props: CardFormProps) {
   return (
     <form
       className="CardForm"
-      name="card-form"
+      name="cardForm"
       onSubmit={handleSubmit(cardFormSubmitHandler)}
       onReset={resetForm}
       noValidate
     >
       <fieldset className="CardForm-fieldset">
         <legend className="CardForm-legend">Create new image card</legend>
-
         <div className="form-two-columns-container">
-          <div className="CardForm-field input-container">
-            <label className="CardForm-label input-label">
-              Image title:
-              <input
-                className="CardForm-input title-input input"
-                placeholder="Input title, please"
-                {...register('imageTitle', {
-                  required: VALIDATION_ERRORS_MESSAGES.REQUIRED,
-                  minLength: {
-                    value: INPUT_VALUE_LENGTH.MIN,
-                    message: VALIDATION_ERRORS_MESSAGES.LENGTH,
-                  },
-                  maxLength: {
-                    value: INPUT_VALUE_LENGTH.MAX,
-                    message: VALIDATION_ERRORS_MESSAGES.LENGTH,
-                  },
-                })}
-              />
-            </label>
-            <ToolTip
-              className="CardForm-validation-error-message"
-              message={errors.imageTitle?.message}
+          <CardFormFieldWrapper label="Image title:" errorMessage={errors.imageTitle?.message}>
+            <input
+              className="CardForm-input title-input input"
+              placeholder="Input title, please"
+              {...register('imageTitle', INPUT_OPTIONS.WITH_LENGTH_LIMITS)}
             />
-          </div>
+          </CardFormFieldWrapper>
 
-          <div className="CardForm-field input-container">
-            <label className="CardForm-label input-label">
-              Image author name:
-              <input
-                className="CardForm-input author-input input"
-                placeholder="Input author name, please"
-                {...register('author', {
-                  required: VALIDATION_ERRORS_MESSAGES.REQUIRED,
-                  minLength: {
-                    value: INPUT_VALUE_LENGTH.MIN,
-                    message: VALIDATION_ERRORS_MESSAGES.LENGTH,
-                  },
-                  maxLength: {
-                    value: INPUT_VALUE_LENGTH.MAX,
-                    message: VALIDATION_ERRORS_MESSAGES.LENGTH,
-                  },
-                })}
-              />
-            </label>
-            <ToolTip
-              className="CardForm-validation-error-message"
-              message={errors.author?.message}
+          <CardFormFieldWrapper label="Image author name" errorMessage={errors.author?.message}>
+            <input
+              className="CardForm-input author-input input"
+              placeholder="Input author name, please"
+              {...register('author', INPUT_OPTIONS.WITH_LENGTH_LIMITS)}
             />
-          </div>
+          </CardFormFieldWrapper>
         </div>
 
         <div className="form-two-columns-container">
-          <div className="CardForm-field input-container">
-            <label className="CardForm-label input-label">
-              Image creation date:
-              <input
-                className="CardForm-input date-input input"
-                type="date"
-                max={today}
-                {...register('date', {
-                  required: VALIDATION_ERRORS_MESSAGES.REQUIRED,
-                  max: {
-                    value: today,
-                    message: VALIDATION_ERRORS_MESSAGES.DATE,
-                  },
-                })}
-              />
-            </label>
-            <ToolTip className="CardForm-validation-error-message" message={errors.date?.message} />
-          </div>
-
-          <div className="CardForm-field select-container">
-            <label className="CardForm-label select-label">
-              Image type:
-              <select
-                className="CardForm-select type-select select"
-                {...register('imageType', { required: VALIDATION_ERRORS_MESSAGES.REQUIRED })}
-              >
-                {TYPE_SELECT_OPTIONS.map(({ value, description }) => (
-                  <option
-                    className="CardForm-option type-option"
-                    value={value}
-                    key={`${value}-${description}`}
-                  >
-                    {description}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <ToolTip
-              className="CardForm-validation-error-message"
-              message={errors.imageType?.message}
+          <CardFormFieldWrapper label="Image creation date:" errorMessage={errors.date?.message}>
+            <input
+              className="CardForm-input date-input input"
+              type="date"
+              max={getTodayDateISOString()}
+              {...register('date', INPUT_OPTIONS.DATE)}
             />
-          </div>
+          </CardFormFieldWrapper>
+
+          <CardFormFieldWrapper
+            label="Image type:"
+            additionalClass="initial-cursor"
+            errorMessage={errors.imageType?.message}
+          >
+            <select
+              className="CardForm-select type-select select"
+              {...register('imageType', INPUT_OPTIONS.REQUIRED)}
+            >
+              {TYPE_SELECT_OPTIONS.map(({ value, description }) => (
+                <option
+                  className="CardForm-option type-option"
+                  value={value}
+                  key={`${value}-${description}`}
+                >
+                  {description}
+                </option>
+              ))}
+            </select>
+          </CardFormFieldWrapper>
         </div>
 
         <div className="form-two-columns-container">
-          <div className="CardForm-field input-container CardForm-field__responsibility">
-            <label className="CardForm-label input-label">
-              <span>Do you agree with responsibility?:</span>
-              <input
-                className="CardForm-checkbox responsibility-checkbox"
-                type="checkbox"
-                {...register('responsibility', { required: VALIDATION_ERRORS_MESSAGES.REQUIRED })}
-              />
-            </label>
-            <ToolTip
-              className="CardForm-validation-error-message"
-              message={errors.responsibility?.message}
+          <CardFormFieldWrapper errorMessage={errors.responsibility?.message}>
+            <span>Do you agree with responsibility?:</span>
+            <input
+              className="CardForm-checkbox responsibility-checkbox"
+              type="checkbox"
+              {...register('responsibility', INPUT_OPTIONS.REQUIRED)}
             />
-          </div>
+          </CardFormFieldWrapper>
 
           <div className="CardForm-field CardForm-field__gender">
             <div className="switcher">
@@ -176,7 +116,7 @@ function CardForm(props: CardFormProps) {
                 id="male"
                 type="radio"
                 value="male"
-                {...register('gender', { required: VALIDATION_ERRORS_MESSAGES.REQUIRED })}
+                {...register('gender', INPUT_OPTIONS.REQUIRED)}
               />
               <label className="switcher__label" htmlFor="male">
                 male
@@ -186,7 +126,7 @@ function CardForm(props: CardFormProps) {
                 id="female"
                 type="radio"
                 value="female"
-                {...register('gender', { required: VALIDATION_ERRORS_MESSAGES.REQUIRED })}
+                {...register('gender', INPUT_OPTIONS.REQUIRED)}
               />
               <label className="switcher__label" htmlFor="female">
                 female
@@ -199,20 +139,18 @@ function CardForm(props: CardFormProps) {
           </div>
         </div>
 
-        <div className="CardForm-field input-container">
-          <div className="CardForm-container__file">
-            <label className="CardForm-label CardForm-label_file input-label">
-              <span>Upload this image:</span>
-              <input
-                className="CardForm-input file-input input"
-                type="file"
-                accept=".jpg, .jpeg, .png"
-                {...register('file', { required: VALIDATION_ERRORS_MESSAGES.REQUIRED })}
-              />
-            </label>
-          </div>
-          <ToolTip className="CardForm-validation-error-message" message={errors.file?.message} />
-        </div>
+        <CardFormFieldWrapper
+          additionalClass="CardForm-label_file"
+          errorMessage={errors.file?.message}
+        >
+          <span>Upload this image:</span>
+          <input
+            className="CardForm-input file-input input"
+            type="file"
+            accept=".jpg, .jpeg, .png"
+            {...register('file', INPUT_OPTIONS.REQUIRED)}
+          />
+        </CardFormFieldWrapper>
       </fieldset>
 
       <fieldset className="CardForm-fieldset controls-fieldset">
