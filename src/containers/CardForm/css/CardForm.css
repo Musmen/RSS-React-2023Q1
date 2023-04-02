@@ -18,10 +18,6 @@
   padding-bottom: 0;
 }
 
-.CardForm-validation-error-message {
-  padding-bottom: 5px;
-}
-
 .CardForm-fieldset {
   border-radius: 10px;
 }
@@ -60,11 +56,6 @@
   margin-left: 10px;
 
   color: white;
-}
-
-.CardForm-validation-error-message {
-  min-height: 22px;
-  color: #ff0000;
 }
 
 .form-two-columns-container {

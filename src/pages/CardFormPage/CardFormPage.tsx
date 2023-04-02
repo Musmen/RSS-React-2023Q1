@@ -1,3 +1,5 @@
+import './css/message.css';
+
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import CardForm from '../../containers/CardForm/CardForm';
@@ -52,7 +54,12 @@ function CardFormPage() {
     <>
       <CardForm addCard={addCard} renderMessage={renderMessage} />
       <CardsList cards={cards} isBigCards={true} />
-      {isMessageVisible && <Message message={SUCCESS_CARD_CREATION_MESSAGE} />}
+      {isMessageVisible && (
+        <Message
+          classNames={{ wrapper: 'success-message__layout', message: 'success-message__content' }}
+          message={SUCCESS_CARD_CREATION_MESSAGE}
+        />
+      )}
     </>
   );
 }

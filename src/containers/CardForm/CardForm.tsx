@@ -3,8 +3,8 @@ import './css/CardForm.css';
 import React, { useCallback, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import ToolTip from '../../components/ToolTip/ToolTip';
 import CardFormFieldWrapper from './CardFormFieldWrapper/CardFormFieldWrapper';
+import ErrorMessage from './ErrorMessage/ErrorMessage';
 
 import { getNewCard, getTodayDateISOString } from './CardForm.helpers';
 import { INPUT_OPTIONS, TYPE_SELECT_OPTIONS } from './CardForm.constants';
@@ -132,10 +132,7 @@ function CardForm(props: CardFormProps) {
                 female
               </label>
             </div>
-            <ToolTip
-              className="CardForm-validation-error-message"
-              message={errors.gender?.message}
-            />
+            <ErrorMessage errorMessage={errors.gender?.message} />
           </div>
         </div>
 

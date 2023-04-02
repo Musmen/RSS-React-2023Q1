@@ -1,16 +1,28 @@
-import './Message.css';
-
 import React from 'react';
 
 interface MessageProps {
-  message: string;
+  classNames?: {
+    wrapper?: string;
+    message?: string;
+  };
+  message?: string;
 }
 
-function Message({ message }: MessageProps) {
+const DEFAULT_MESSAGE_PROPS = {
+  classNames: {
+    wrapper: '',
+    message: '',
+  },
+  message: '',
+};
+
+function Message(props: MessageProps = DEFAULT_MESSAGE_PROPS) {
+  const { classNames, message } = props;
+
   return (
-    <div className="Message__layout">
-      <p className="Message__content">{message}</p>
-    </div>
+    <p className={classNames?.wrapper}>
+      <span className={classNames?.message}>{message}</span>
+    </p>
   );
 }
 

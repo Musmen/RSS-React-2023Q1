@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 
 import LabelWrapper from '../../../components/LabelWrapper/LabelWrapper';
-import ToolTip from '../../../components/ToolTip/ToolTip';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 interface CardFormFieldWrapperProps {
   errorMessage: string | undefined;
@@ -18,7 +18,7 @@ function CardFormFieldWrapper(props: CardFormFieldWrapperProps) {
       <LabelWrapper labelClassName={`CardForm-label ${additionalClass || ''}`} label={label}>
         {props.children}
       </LabelWrapper>
-      <ToolTip className="CardForm-validation-error-message" message={errorMessage} />
+      <ErrorMessage errorMessage={errorMessage} />
     </div>
   );
 }
