@@ -20,6 +20,12 @@ Task link: [https://github.com/rolling-scopes-school/tasks/tree/master/react/mod
 
 Deploy: [https://musmen-react-hooks.netlify.app/](https://musmen-react-hooks.netlify.app/)
 
+## Task "React. API"
+
+Task link: [https://github.com/rolling-scopes-school/tasks/tree/master/react/modules/module04](https://github.com/rolling-scopes-school/tasks/tree/master/react/modules/module04)
+
+Deploy: [https://musmen-react-api.netlify.app/](https://musmen-react-api.netlify.app/)
+
 ### Brief instructions for installing and using the project
 
 #### **Installation:**
