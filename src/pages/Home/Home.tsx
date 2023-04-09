@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import SearchBar from '../../components/SearchBar/SearchBar';
 import CardsList from '../../containers/CardsList/CardsList';
@@ -17,7 +17,11 @@ import { CardType } from '../../models/card';
 const DEFAULT_SEARCH_REQUEST = 'animals';
 
 function Home() {
+  const [cards, setCards] = useState<CardType[]>([]);
   const [currentPhotoCard, setCurrentPhotoCard] = useState<CardType>({} as CardType);
+
+  const searchRequestFromLS = localStorageService.getFromLS(LOCAL_STORAGE_KEYS.SEARCH_VALUE);
+  const [searchRequest, setSearchRequest] = useState(searchRequestFromLS || '');
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -25,19 +29,9 @@ function Home() {
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const searchRequestFromLS = localStorageService.getFromLS(LOCAL_STORAGE_KEYS.SEARCH_VALUE);
-  const searchRequestRef = useRef<string>();
-
-  const [cards, setCards] = useState<CardType[]>([]);
-  const [searchRequest, updateSearchRequest] = useState(searchRequestFromLS || '');
-
-  useEffect(() => {
-    searchRequestRef.current = searchRequest;
-  }, [searchRequest]);
-
-  useEffect(() => {
-    return () =>
-      localStorageService.setToLS(searchRequestRef.current || '', LOCAL_STORAGE_KEYS.SEARCH_VALUE);
+  const updateSearchRequest = useCallback((newSearchRequest: string) => {
+    localStorageService.setToLS(newSearchRequest || '', LOCAL_STORAGE_KEYS.SEARCH_VALUE);
+    setSearchRequest(newSearchRequest);
   }, []);
 
   const setError = useCallback((errorMessage: string) => {
@@ -62,6 +56,10 @@ function Home() {
     [setError]
   );
 
+  useEffect(() => {
+    updateSearchResults(searchRequest);
+  }, [updateSearchResults, searchRequest]);
+
   const showCurrentPhotoCardPopup = useCallback(
     async (photoId: string) => {
       setIsLoading(true);
@@ -79,10 +77,6 @@ function Home() {
     },
     [setError]
   );
-
-  useEffect(() => {
-    updateSearchResults(searchRequest);
-  }, [updateSearchResults, searchRequest]);
 
   const closePopup = useCallback(() => {
     setIsPopupOpen(false);

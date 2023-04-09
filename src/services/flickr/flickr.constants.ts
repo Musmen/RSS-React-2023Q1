@@ -9,7 +9,7 @@ const URLS = {
   GET_INFO: 'getInfo',
   KEY: `&api_key=${API_KEY}`,
   CONFIG: {
-    SEARCH: `&extras=url_m,date_upload,owner_name${URL_POSTFIX}`,
+    SEARCH: `&media=photos&content_type=1&content_types=0&extras=url_m,date_upload,owner_name${URL_POSTFIX}`,
     GET_INFO: URL_POSTFIX,
   },
 };

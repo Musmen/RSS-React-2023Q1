@@ -4,12 +4,12 @@ import React, { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 
 interface SearchBarProps {
   searchRequest: string;
-  updateSearchRequest: (searchValue: string) => void;
+  updateSearchRequest: (newSearchRequest: string) => void;
   placeholder?: string;
 }
 
 function SearchBar({ searchRequest, updateSearchRequest, placeholder }: SearchBarProps) {
-  const [searchValue, setSearchValue] = useState(searchRequest);
+  const [searchValue, setSearchValue] = useState(searchRequest || '');
 
   const onClearBtnClickHandler = useCallback(() => {
     setSearchValue('');
