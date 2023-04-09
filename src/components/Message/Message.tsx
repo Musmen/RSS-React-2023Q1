@@ -1,3 +1,5 @@
+import './Message.css';
+
 import React from 'react';
 
 interface MessageProps {
