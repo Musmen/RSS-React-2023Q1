@@ -2,8 +2,8 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import PopupCard from './PopupCard';
 
-import { mockCardsData } from '../../common/testMockCardsData';
-const mockCardData = mockCardsData[1];
+import { mockCardsData } from '../../tests-data/testMockCardsData';
+const mockCardData = { ...mockCardsData[1], description: 'Test card', views: 56 };
 
 test('renders full card', () => {
   render(<PopupCard card={mockCardData} />);

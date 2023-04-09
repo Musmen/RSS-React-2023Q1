@@ -9,8 +9,12 @@ interface PopupProps {
 
 function Popup({ closePopup, children }: PopupProps) {
   return (
-    <div className="Popup-overlay" onClick={closePopup}>
-      <div className="Popup" onClick={(event: MouseEvent) => event.stopPropagation()}>
+    <div data-testid="overlay" className="Popup-overlay" onClick={closePopup}>
+      <div
+        data-testid="popup"
+        className="Popup"
+        onClick={(event: MouseEvent) => event.stopPropagation()}
+      >
         <button
           className="Popup-button button_close"
           type="button"

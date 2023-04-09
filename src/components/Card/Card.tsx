@@ -16,6 +16,7 @@ function Card({ card, additionalClass, children, onCardClickHandler }: CardProps
 
   return (
     <section
+      data-testid="card"
       className={`Card card ${additionalClass || ''}`}
       onClick={() => onCardClickHandler && onCardClickHandler(id || '')}
     >

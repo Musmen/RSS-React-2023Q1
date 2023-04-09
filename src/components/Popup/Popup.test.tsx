@@ -1,26 +1,33 @@
 import React from 'react';
+import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import Popup from './Popup';
 import userEvent from '@testing-library/user-event';
 
-describe('Start popup testing', () => {
-  let firstElementChild: Element | null;
+import Popup from './Popup';
 
-  const closePopup = jest.fn(() => {});
+describe('Start popup testing', () => {
+  const closePopup = vi.fn(() => {});
   const testMessage = 'Popup Test Message!';
 
+  let overlay: HTMLElement;
+
   beforeEach(() => {
-    const component = render(
+    render(
       <Popup closePopup={closePopup}>
         <p>{testMessage}</p>
       </Popup>
     );
-    ({ firstElementChild } = component.container);
+
+    overlay = screen.getByTestId('overlay');
+  });
+
+  afterEach(() => {
+    vi.resetAllMocks();
   });
 
   it('renders popup', () => {
-    expect(firstElementChild).toBeInTheDocument();
-    expect(firstElementChild?.tagName).toBe('DIV');
+    expect(overlay).toBeInTheDocument();
+    expect(overlay).toHaveClass('Popup-overlay');
   });
 
   it('renders popup children', () => {
@@ -28,20 +35,20 @@ describe('Start popup testing', () => {
     expect(message).toBeInTheDocument();
   });
 
-  it('close popup by click on the overlay', () => {
-    firstElementChild && userEvent.click(firstElementChild);
+  it('close popup by click on the overlay', async () => {
+    await userEvent.click(overlay);
     expect(closePopup).toBeCalledTimes(1);
   });
 
-  it('close popup by click on the close button', () => {
-    const closePopupButton = firstElementChild?.querySelector('.button--close');
-    closePopupButton && userEvent.click(closePopupButton);
+  it('close popup by click on the close button', async () => {
+    const closePopupButton = screen.getByRole('button');
+    await userEvent.click(closePopupButton);
     expect(closePopup).toBeCalledTimes(1);
   });
 
-  it('do not close popup by click on the popup element', () => {
-    const popup = firstElementChild?.querySelector('.Popup');
-    popup && userEvent.click(popup);
-    expect(closePopup).not.toBeCalled();
+  it('do not close popup by click on the popup element', async () => {
+    const popup = screen.getByTestId('popup');
+    await userEvent.click(popup);
+    expect(closePopup).toBeCalledTimes(0);
   });
 });

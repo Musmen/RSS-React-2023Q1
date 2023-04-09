@@ -3,8 +3,8 @@ import './SearchBar.css';
 import React, { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 
 interface SearchBarProps {
-  searchRequest: string;
-  updateSearchRequest: (newSearchRequest: string) => void;
+  searchRequest?: string;
+  updateSearchRequest?: (newSearchRequest: string) => void;
   placeholder?: string;
 }
 
@@ -26,7 +26,7 @@ function SearchBar({ searchRequest, updateSearchRequest, placeholder }: SearchBa
   const onSubmitHandler = useCallback(
     (event: FormEvent) => {
       event.preventDefault();
-      updateSearchRequest(searchValue);
+      updateSearchRequest && updateSearchRequest(searchValue);
     },
     [updateSearchRequest, searchValue]
   );

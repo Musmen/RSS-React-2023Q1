@@ -10,7 +10,7 @@ import BigCard from '../../components/BigCard/BigCard';
 interface CardsListProps {
   cards: CardType[];
   isBigCards?: boolean;
-  onCardClickHandler: (id: string) => void;
+  onCardClickHandler?: (id: string) => void;
 }
 
 function CardsList({ cards, isBigCards, onCardClickHandler }: CardsListProps) {

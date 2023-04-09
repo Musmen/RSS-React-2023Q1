@@ -4,7 +4,7 @@ import React from 'react';
 
 function Spinner() {
   return (
-    <div className="Spinner">
+    <div data-testid="spinner" className="Spinner">
       <svg className="Spinner-machine" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 645 526">
         <g>
           <path
