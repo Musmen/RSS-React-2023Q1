@@ -7,3 +7,15 @@
 .CardsList__item {
   margin: 5px;
 }
+
+.CardsList__item:hover .Card,
+.CardsList__item:focus .Card,
+.CardsList__item:active .Card {
+  border: 2px solid #61dafb;
+}
+
+.CardsList__item:hover .BigCard,
+.CardsList__item:focus .BigCard,
+.CardsList__item:active .BigCard {
+  border: 2px solid #ffffff66;
+}

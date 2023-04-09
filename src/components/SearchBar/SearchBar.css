@@ -38,26 +38,6 @@
   position: absolute;
   top: 6px;
   right: 6px;
-
-  width: 34px;
-  height: 34px;
-  padding: 0;
-
-  border: none;
-  border-radius: 50%;
-
-  background-color: transparent;
-  background-image: url('./assets/clear-btn.png');
-  background-repeat: no-repeat;
-  background-size: 34px;
-
-  cursor: pointer;
-}
-
-.SearchBar__clear-btn:hover,
-.SearchBar__clear-btn:focus,
-.SearchBar__clear-btn:active {
-  outline: 1px solid #61dafb;
 }
 
 @media (max-width: 800px) {
