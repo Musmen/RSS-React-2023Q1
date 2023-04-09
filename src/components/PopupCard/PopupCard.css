@@ -1,0 +1,45 @@
+.PopupCard {
+  display: flex;
+}
+
+.PopupCard p {
+  margin: 0;
+}
+
+.PopupCard .card-title,
+.PopupCard .card-author,
+.PopupCard .card-date {
+  padding: 0;
+  text-align: start;
+}
+
+.PopupCard-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin: 20px;
+  margin-top: 30px;
+
+  overflow: hidden;
+}
+
+.PopupCard-title {
+  align-self: center;
+}
+
+.PopupCard-description {
+  max-height: 182px;
+
+  overflow: hidden;
+}
+
+.PopupCard-image {
+  border-top-left-radius: 20px;
+}
+
+.PopupCard-right,
+.PopupCard-image {
+  max-width: 40vw;
+  max-height: calc(100vh - 100px);
+}
