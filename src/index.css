@@ -1,4 +1,5 @@
 @import './css/form.css';
+@import './css/card.css';
 
 body {
   margin: 0;
@@ -20,4 +21,10 @@ body {
 
 .bold-text {
   font-weight: bold;
+}
+
+.link {
+  color: inherit;
+
+  text-decoration: none;
 }

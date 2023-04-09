@@ -64,3 +64,29 @@ label {
   outline: 2px solid #61dafb;
   cursor: pointer;
 }
+
+.button_clear,
+.button_close {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+
+  border: none;
+  border-radius: 50%;
+
+  background-color: transparent;
+  background-image: url('../../clear-btn.png');
+  background-repeat: no-repeat;
+  background-size: 34px;
+
+  cursor: pointer;
+}
+
+.button_clear:hover,
+.button_clear:focus,
+.button_clear:active,
+.button_close:hover,
+.button_close:focus,
+.button_close:active {
+  outline: 1px solid #61dafb;
+}

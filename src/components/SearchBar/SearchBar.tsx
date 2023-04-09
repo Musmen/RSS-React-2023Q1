@@ -1,43 +1,35 @@
 import './SearchBar.css';
 
-import React, { ChangeEvent, FormEvent, useState, useEffect, useCallback, useRef } from 'react';
+import React, { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 
-import localStorageService from '../../services/local-storage.service';
-import { LOCAL_STORAGE_KEYS } from '../../common/constants';
+interface SearchBarProps {
+  searchRequest?: string;
+  updateSearchRequest?: (newSearchRequest: string) => void;
+  placeholder?: string;
+}
 
-const DEFAULT_SEARCH_VALUE = '';
-
-function SearchBar() {
-  const searchValueFromLS = localStorageService.getFromLS(LOCAL_STORAGE_KEYS.SEARCH_VALUE);
-
-  const [searchValue, setSearchValue] = useState<string>(searchValueFromLS || DEFAULT_SEARCH_VALUE);
-
-  const searchValueRef = useRef<string>();
-
-  useEffect(() => {
-    searchValueRef.current = searchValue;
-  }, [searchValue]);
-
-  useEffect(() => {
-    return () =>
-      localStorageService.setToLS(
-        searchValueRef.current || DEFAULT_SEARCH_VALUE,
-        LOCAL_STORAGE_KEYS.SEARCH_VALUE
-      );
-  }, []);
+function SearchBar({ searchRequest, updateSearchRequest, placeholder }: SearchBarProps) {
+  const [searchValue, setSearchValue] = useState(searchRequest || '');
 
   const onClearBtnClickHandler = useCallback(() => {
-    setSearchValue(DEFAULT_SEARCH_VALUE);
-  }, []);
+    setSearchValue('');
+  }, [setSearchValue]);
 
-  const onSearchValueChangeHandler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    const newSearchValue: string = event.target.value;
-    setSearchValue(newSearchValue);
-  }, []);
+  const onSearchValueChangeHandler = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const newSearchValue: string = event.target.value;
+      setSearchValue(newSearchValue);
+    },
+    [setSearchValue]
+  );
 
-  const onSubmitHandler = useCallback((event: FormEvent) => {
-    event.preventDefault();
-  }, []);
+  const onSubmitHandler = useCallback(
+    (event: FormEvent) => {
+      event.preventDefault();
+      updateSearchRequest && updateSearchRequest(searchValue);
+    },
+    [updateSearchRequest, searchValue]
+  );
 
   return (
     <form className="SearchBar" onSubmit={onSubmitHandler}>
@@ -45,13 +37,13 @@ function SearchBar() {
         <input
           className="SearchBar__input"
           name="SearchBar"
-          placeholder="Your search request"
+          placeholder={placeholder || 'Your search request'}
           title="Input your search request, please"
           value={searchValue}
           onChange={onSearchValueChangeHandler}
         />
         <button
-          className="SearchBar__clear-btn"
+          className="SearchBar__clear-btn button_clear"
           type="reset"
           title="Clear search input"
           onClick={onClearBtnClickHandler}

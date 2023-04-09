@@ -5,10 +5,10 @@ import CardsList from './CardsList';
 
 import { getRandom } from '../../common/helpers';
 
-import { cardsData } from '../../data/cardsData';
-const cardsCount = cardsData.length;
+import { mockCardsData } from '../../tests-data/testMockCardsData';
+const cardsCount = mockCardsData.length;
 
-const mockBigCardsData = cardsData.map((card) => ({
+const mockBigCardsData = mockCardsData.map((card) => ({
   ...card,
   authorGender: 'male',
   responsibility: true,
@@ -20,7 +20,7 @@ describe('Start cards list test', () => {
 
   it('Testing list with Cards component', () => {
     beforeEach(() => {
-      render(<CardsList cards={cardsData} isBigCards={false} />);
+      render(<CardsList cards={mockCardsData} isBigCards={false} />);
       randomCardNumber = getRandom(cardsCount);
     });
 
@@ -35,22 +35,24 @@ describe('Start cards list test', () => {
     });
 
     it('should render random card title correctly', () => {
-      const cardTitleElement = screen.getByText(cardsData[randomCardNumber].title);
+      const cardTitleElement = screen.getByText(mockCardsData[randomCardNumber].title);
       expect(cardTitleElement).toBeInTheDocument();
     });
 
     it('should render random card image correctly', () => {
-      const cardImageElement = screen.getByAltText(new RegExp(cardsData[randomCardNumber].title));
-      expect(cardImageElement).toHaveAttribute('src', cardsData[randomCardNumber].imgSrc);
+      const cardImageElement = screen.getByAltText(
+        new RegExp(mockCardsData[randomCardNumber].title)
+      );
+      expect(cardImageElement).toHaveAttribute('src', mockCardsData[randomCardNumber].imgSrc);
     });
 
     it('should render random card author correctly', () => {
-      const cardAuthorElement = screen.getByText(cardsData[randomCardNumber].author);
+      const cardAuthorElement = screen.getByText(mockCardsData[randomCardNumber].author);
       expect(cardAuthorElement).toBeInTheDocument();
     });
 
     it('should render random card date correctly', () => {
-      const cardDateElement = screen.getByText(cardsData[randomCardNumber].date);
+      const cardDateElement = screen.getByText(mockCardsData[randomCardNumber].date);
       expect(cardDateElement).toBeInTheDocument();
     });
   });

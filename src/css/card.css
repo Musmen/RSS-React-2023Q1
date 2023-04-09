@@ -1,0 +1,48 @@
+.card {
+  color: white;
+
+  border-top-left-radius: 20px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 0;
+
+  background-color: #282c34;
+}
+
+.card__title {
+  padding: 5px;
+}
+
+.card__label {
+  display: inline-block;
+  max-width: 130px;
+  margin: 0 5px;
+  padding: 5px 0;
+
+  font-weight: bold;
+  color: #61dafb;
+}
+
+.card__field {
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.card__image {
+  display: flex;
+
+  text-align: center;
+
+  object-fit: contain;
+
+  overflow: hidden;
+}
+
+.card__description {
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+}

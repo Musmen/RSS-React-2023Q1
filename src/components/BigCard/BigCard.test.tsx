@@ -2,12 +2,12 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import BigCard from './BigCard';
 
-import { cardsData } from '../../data/cardsData';
+import { mockCardsData } from '../../tests-data/testMockCardsData';
 import { DEFAULT_BIG_CARD_ADDITIONAL_FIELDS } from './BigCard.constants';
 
 describe('Start BigCard testing', () => {
   it('should render BigCard with default fields', () => {
-    const mockCardData = cardsData[0];
+    const mockCardData = mockCardsData[0];
     render(<BigCard card={mockCardData} />);
 
     const cardTitleElement = screen.getByText(mockCardData.title);
@@ -38,7 +38,7 @@ describe('Start BigCard testing', () => {
 
   it('should render BigCard with correct fields', () => {
     const mockCardData = {
-      ...cardsData[1],
+      ...mockCardsData[1],
       authorGender: 'male',
       responsibility: true,
       type: 'map',

@@ -1,6 +1,6 @@
 import { CardType } from '../models/card';
 
-export const cardsData: CardType[] = [
+export const mockCardsData: CardType[] = [
   {
     id: '1',
     title: 'First Bird',

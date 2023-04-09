@@ -19,15 +19,15 @@ function BigCard({ card }: BigCardProps) {
     <Card card={card} additionalClass="BigCard">
       <>
         <span className="Card__wrapper">
-          <span className="Card__label">Author gender:</span>
+          <span className="Card__label card__label">Author gender:</span>
           {authorGender || DEFAULT_BIG_CARD_ADDITIONAL_FIELDS.authorGender}
         </span>
         <span className="Card__wrapper">
-          <span className="Card__label">Responsibility:</span>
+          <span className="Card__label card__label">Responsibility:</span>
           {(responsibility && '✓') || DEFAULT_BIG_CARD_ADDITIONAL_FIELDS.responsibility}
         </span>
         <span className="Card__wrapper">
-          <span className="Card__label">Type:</span>
+          <span className="Card__label card__label">Type:</span>
           {type || DEFAULT_BIG_CARD_ADDITIONAL_FIELDS.type}
         </span>
       </>

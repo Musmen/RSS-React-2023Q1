@@ -2,8 +2,8 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Card from './Card';
 
-import { cardsData } from '../../data/cardsData';
-const mockCardData = cardsData[0];
+import { mockCardsData } from '../../tests-data/testMockCardsData';
+const mockCardData = mockCardsData[0];
 
 describe('Start Card testing', () => {
   it('should render card correctly', () => {

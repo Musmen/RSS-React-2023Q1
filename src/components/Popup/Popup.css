@@ -1,0 +1,48 @@
+.Popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+
+  background: #00000099;
+
+  z-index: 100;
+}
+
+.Popup {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 600px;
+  min-height: 100px;
+  margin: 50px;
+
+  border: 2px solid #ffffff66;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+  box-shadow: 5px 5px 5px 2px #00000080;
+}
+
+.Popup-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 28px;
+  height: 28px;
+
+  background-color: #ffffff99;
+  background-size: 28px;
+}
+
+.Popup-button:hover,
+.Popup-button:focus,
+.Popup-button:active {
+  background-color: #ffffff;
+}

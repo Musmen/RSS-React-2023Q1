@@ -9,8 +9,8 @@ import { getTodayDateISOString } from './CardForm.helpers';
 import CardForm from './CardForm';
 import { TYPE_SELECT_OPTIONS, VALIDATION_ERRORS_MESSAGES } from './CardForm.constants';
 
-import { cardsData } from '../../data/cardsData';
-const cardsCount = cardsData.length;
+import { mockCardsData } from '../../tests-data/testMockCardsData';
+const cardsCount = mockCardsData.length;
 
 describe('Start CardForm testing', () => {
   let cardFormElement: HTMLElement;
@@ -74,7 +74,7 @@ describe('Start CardForm testing', () => {
 
   it('should validate form correctly', async () => {
     const randomCardNumber = getRandom(cardsCount);
-    const randomCard = cardsData[randomCardNumber];
+    const randomCard = mockCardsData[randomCardNumber];
 
     const titleInputElement = screen.getByPlaceholderText(/input title/i);
     expect(titleInputElement).toHaveValue('');
