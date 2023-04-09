@@ -1,3 +1,7 @@
 .BigCard {
   height: 335px;
 }
+
+.BigCard:hover {
+  cursor: initial;
+}
