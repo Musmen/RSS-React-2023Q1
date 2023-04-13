@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { updateSearchQuery } from '../actions/searchQueryActions';
+import { updateSearchQuery } from '../actions/searchQuery.actions';
 
 const searchQueryInitialState = {
   value: '',

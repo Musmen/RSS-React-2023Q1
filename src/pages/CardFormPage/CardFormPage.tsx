@@ -2,6 +2,9 @@ import './css/message.css';
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { addFormCard } from '../../redux/actions/cardForm.actions';
+
 import CardForm from '../../containers/CardForm/CardForm';
 import CardsList from '../../containers/CardsList/CardsList';
 import Message from '../../components/Message/Message';
@@ -17,9 +20,8 @@ import { BigCardType, CardType } from '../../models/card';
 function CardFormPage() {
   const messageVisibilityTimer = useRef<NodeJS.Timeout | null>(null);
 
-  const [cards, setCards] = useState<(CardType | BigCardType)[]>(
-    CARD_FORM_PAGE_DEFAULT_STATE.cards
-  );
+  const cards = useAppSelector((state) => state.cardForm.cards);
+  const dispatch = useAppDispatch();
 
   const [isMessageVisible, setIsMessageVisible] = useState<boolean>(
     CARD_FORM_PAGE_DEFAULT_STATE.isMessageVisible
@@ -40,9 +42,9 @@ function CardFormPage() {
     (card: CardType | BigCardType) => {
       const newCardId = String(cards.length);
       const newCard: CardType | BigCardType = { ...card, id: newCardId };
-      setCards([...cards, newCard]);
+      dispatch(addFormCard(newCard));
     },
-    [cards]
+    [cards.length, dispatch]
   );
 
   const renderMessage = useCallback(() => {

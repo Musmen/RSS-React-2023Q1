@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { searchQueryReducer } from './reducers/searchQueryReducer';
+import { cardFormReducer } from './reducers/cardForm.reducer';
+import { searchQueryReducer } from './reducers/searchQuery.reducer';
 
 const rootReducer = combineReducers({
   searchQuery: searchQueryReducer,
+  cardForm: cardFormReducer,
 });
 
 export const store = configureStore({

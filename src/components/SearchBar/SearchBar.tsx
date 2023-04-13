@@ -3,7 +3,7 @@ import './SearchBar.css';
 import React, { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { updateSearchQuery } from '../../redux/actions/searchQueryActions';
+import { updateSearchQuery } from '../../redux/actions/searchQuery.actions';
 
 interface SearchBarProps {
   placeholder?: string;
