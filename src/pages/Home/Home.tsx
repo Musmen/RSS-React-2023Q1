@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useAppSelector } from '../../redux/hooks';
+
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { addSearchResultCards } from '../../redux/actions/searchApi.actions';
 
 import SearchBar from '../../components/SearchBar/SearchBar';
 import CardsList from '../../containers/CardsList/CardsList';
@@ -17,7 +19,10 @@ import { CardType } from '../../models/card';
 const DEFAULT_SEARCH_REQUEST = 'animals';
 
 function Home() {
-  const [cards, setCards] = useState<CardType[]>([]);
+  const dispatch = useAppDispatch();
+  const searchRequest = useAppSelector((state) => state.searchApi.request);
+  const cards = useAppSelector((state) => state.searchApi.resultCards);
+
   const [currentPhotoCard, setCurrentPhotoCard] = useState<CardType>({} as CardType);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -25,8 +30,6 @@ function Home() {
 
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
-  const searchQuery = useAppSelector((state) => state.searchQuery.value);
 
   const setError = useCallback((errorMessage: string) => {
     setIsError(Boolean(errorMessage));
@@ -39,7 +42,7 @@ function Home() {
 
       try {
         const cards: CardType[] = await getCardsFromFlickr(searchRequest || DEFAULT_SEARCH_REQUEST);
-        setCards(cards);
+        dispatch(addSearchResultCards(cards));
       } catch (error) {
         const errorMessage = (error as Error).message || ERROR_MESSAGES.DEFAULT;
         setError(errorMessage);
@@ -47,12 +50,12 @@ function Home() {
         setIsLoading(false);
       }
     },
-    [setError]
+    [setError, dispatch]
   );
 
   useEffect(() => {
-    updateSearchResults(searchQuery);
-  }, [updateSearchResults, searchQuery]);
+    updateSearchResults(searchRequest);
+  }, [updateSearchResults, searchRequest]);
 
   const showCurrentPhotoCardPopup = useCallback(
     async (photoId: string) => {
