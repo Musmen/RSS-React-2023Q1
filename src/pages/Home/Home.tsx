@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useAppSelector } from '../../redux/hooks';
 
 import SearchBar from '../../components/SearchBar/SearchBar';
 import CardsList from '../../containers/CardsList/CardsList';
@@ -7,10 +8,9 @@ import PopupCard from '../../components/PopupCard/PopupCard';
 import Popup from '../../components/Popup/Popup';
 import Message from '../../components/Message/Message';
 
-import localStorageService from '../../services/local-storage.service';
 import { getCardsFromFlickr, getPhotoCardFromFlickr } from '../../services/flickr/flickr.service';
 
-import { ERROR_MESSAGES, LOCAL_STORAGE_KEYS } from '../../common/constants';
+import { ERROR_MESSAGES } from '../../common/constants';
 
 import { CardType } from '../../models/card';
 
@@ -20,19 +20,13 @@ function Home() {
   const [cards, setCards] = useState<CardType[]>([]);
   const [currentPhotoCard, setCurrentPhotoCard] = useState<CardType>({} as CardType);
 
-  const searchRequestFromLS = localStorageService.getFromLS(LOCAL_STORAGE_KEYS.SEARCH_VALUE);
-  const [searchRequest, setSearchRequest] = useState(searchRequestFromLS || '');
-
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const updateSearchRequest = useCallback((newSearchRequest: string) => {
-    localStorageService.setToLS(newSearchRequest || '', LOCAL_STORAGE_KEYS.SEARCH_VALUE);
-    setSearchRequest(newSearchRequest);
-  }, []);
+  const searchQuery = useAppSelector((state) => state.searchQuery.value);
 
   const setError = useCallback((errorMessage: string) => {
     setIsError(Boolean(errorMessage));
@@ -57,8 +51,8 @@ function Home() {
   );
 
   useEffect(() => {
-    updateSearchResults(searchRequest);
-  }, [updateSearchResults, searchRequest]);
+    updateSearchResults(searchQuery);
+  }, [updateSearchResults, searchQuery]);
 
   const showCurrentPhotoCardPopup = useCallback(
     async (photoId: string) => {
@@ -91,11 +85,7 @@ function Home() {
     <>
       {isLoading && <Spinner />}
 
-      <SearchBar
-        searchRequest={searchRequest}
-        updateSearchRequest={updateSearchRequest}
-        placeholder={`Default request - "${DEFAULT_SEARCH_REQUEST}"`}
-      />
+      <SearchBar placeholder={`Default request - "${DEFAULT_SEARCH_REQUEST}"`} />
       <CardsList cards={cards} onCardClickHandler={showCurrentPhotoCardPopup} />
 
       {isPopupOpen && (

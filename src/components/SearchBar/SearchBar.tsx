@@ -2,14 +2,18 @@ import './SearchBar.css';
 
 import React, { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { updateSearchQuery } from '../../redux/actions/searchQueryActions';
+
 interface SearchBarProps {
-  searchRequest?: string;
-  updateSearchRequest?: (newSearchRequest: string) => void;
   placeholder?: string;
 }
 
-function SearchBar({ searchRequest, updateSearchRequest, placeholder }: SearchBarProps) {
-  const [searchValue, setSearchValue] = useState(searchRequest || '');
+function SearchBar({ placeholder }: SearchBarProps) {
+  const searchQuery = useAppSelector((state) => state.searchQuery.value);
+  const dispatch = useAppDispatch();
+
+  const [searchValue, setSearchValue] = useState(searchQuery || '');
 
   const onClearBtnClickHandler = useCallback(() => {
     setSearchValue('');
@@ -26,9 +30,9 @@ function SearchBar({ searchRequest, updateSearchRequest, placeholder }: SearchBa
   const onSubmitHandler = useCallback(
     (event: FormEvent) => {
       event.preventDefault();
-      updateSearchRequest && updateSearchRequest(searchValue);
+      dispatch(updateSearchQuery(searchValue));
     },
-    [updateSearchRequest, searchValue]
+    [dispatch, searchValue]
   );
 
   return (
