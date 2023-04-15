@@ -1,16 +1,16 @@
 import './SearchBar.css';
 
 import React, { ChangeEvent, FormEvent, useCallback, useState } from 'react';
+import { updateSearchRequest } from '../../redux/slices/search.slice';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { updateSearchRequest } from '../../redux/actions/searchApi.actions';
 
 interface SearchBarProps {
   placeholder?: string;
 }
 
 function SearchBar({ placeholder }: SearchBarProps) {
-  const searchQuery = useAppSelector((state) => state.searchApi.request);
+  const searchQuery = useAppSelector((state) => state.search.request);
   const dispatch = useAppDispatch();
 
   const [searchValue, setSearchValue] = useState(searchQuery || '');

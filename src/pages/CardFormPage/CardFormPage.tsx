@@ -3,7 +3,7 @@ import './css/message.css';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { addFormCard } from '../../redux/actions/cardForm.actions';
+import { addFormCard } from '../../redux/slices/cardForm.slice';
 
 import CardForm from '../../containers/CardForm/CardForm';
 import CardsList from '../../containers/CardsList/CardsList';

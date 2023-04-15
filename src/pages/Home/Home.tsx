@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { addSearchResultCards } from '../../redux/actions/searchApi.actions';
+import { addSearchResultCards } from '../../redux/slices/search.slice';
 
 import SearchBar from '../../components/SearchBar/SearchBar';
 import CardsList from '../../containers/CardsList/CardsList';
@@ -20,8 +20,8 @@ const DEFAULT_SEARCH_REQUEST = 'animals';
 
 function Home() {
   const dispatch = useAppDispatch();
-  const searchRequest = useAppSelector((state) => state.searchApi.request);
-  const cards = useAppSelector((state) => state.searchApi.resultCards);
+  const searchRequest = useAppSelector((state) => state.search.request);
+  const cards = useAppSelector((state) => state.search.resultCards);
 
   const [currentPhotoCard, setCurrentPhotoCard] = useState<CardType>({} as CardType);
 
