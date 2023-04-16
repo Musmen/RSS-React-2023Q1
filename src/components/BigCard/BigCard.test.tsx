@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import BigCard from './BigCard';
 
-import { mockCardsData } from '../../tests-data/testMockCardsData';
+import { mockCardsData } from '../../tests-common/testMockCardsData';
 import { DEFAULT_BIG_CARD_ADDITIONAL_FIELDS } from './BigCard.constants';
 
 describe('Start BigCard testing', () => {

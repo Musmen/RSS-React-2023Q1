@@ -9,7 +9,7 @@ export default defineConfig({
     setupFiles: './setupTests.ts',
     coverage: {
       exclude: [
-        'vite.config.ts', 'src/vite-env.d.ts', 'src/index.tsx', '**/*.test.tsx', '**/*.test.ts', 'dist', 'src/models'
+        'vite.config.ts', 'src/vite-env.d.ts', 'src/index.tsx', '**/*.test.tsx', '**/*.test.ts', 'dist', 'src/models', '**/*.models.ts'
       ],
       provider: 'c8',
       all: true,

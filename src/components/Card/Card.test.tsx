@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Card from './Card';
 
-import { mockCardsData } from '../../tests-data/testMockCardsData';
+import { mockCardsData } from '../../tests-common/testMockCardsData';
 const mockCardData = mockCardsData[0];
 
 describe('Start Card testing', () => {

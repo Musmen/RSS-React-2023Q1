@@ -1,5 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
+import { skipToken } from '@reduxjs/toolkit/dist/query/react';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { addSearchResultCards } from '../../redux/slices/search.slice';
+import {
+  useFetchPhotoInfoByIdQuery,
+  useFetchPhotosBySearchRequestQuery,
+} from '../../redux/slices/flickrApi.slice';
+
 import SearchBar from '../../components/SearchBar/SearchBar';
 import CardsList from '../../containers/CardsList/CardsList';
 import Spinner from '../../components/Spinner/Spinner';
@@ -7,100 +15,86 @@ import PopupCard from '../../components/PopupCard/PopupCard';
 import Popup from '../../components/Popup/Popup';
 import Message from '../../components/Message/Message';
 
-import localStorageService from '../../services/local-storage.service';
-import { getCardsFromFlickr, getPhotoCardFromFlickr } from '../../services/flickr/flickr.service';
-
-import { ERROR_MESSAGES, LOCAL_STORAGE_KEYS } from '../../common/constants';
-
-import { CardType } from '../../models/card';
+import { getErrorMessage } from '../../common/helpers';
+import { DEFAULT_ERROR_MESSAGE } from '../../common/constants';
 
 const DEFAULT_SEARCH_REQUEST = 'animals';
 
 function Home() {
-  const [cards, setCards] = useState<CardType[]>([]);
-  const [currentPhotoCard, setCurrentPhotoCard] = useState<CardType>({} as CardType);
+  const dispatch = useAppDispatch();
+  const searchRequest = useAppSelector((state) => state.search.request);
+  const cards = useAppSelector((state) => state.search.resultCards);
 
-  const searchRequestFromLS = localStorageService.getFromLS(LOCAL_STORAGE_KEYS.SEARCH_VALUE);
-  const [searchRequest, setSearchRequest] = useState(searchRequestFromLS || '');
+  const [currentPhotoCardId, setCurrentPhotoCardId] = useState<string>('');
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const [isError, setIsError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState<string>();
 
-  const updateSearchRequest = useCallback((newSearchRequest: string) => {
-    localStorageService.setToLS(newSearchRequest || '', LOCAL_STORAGE_KEYS.SEARCH_VALUE);
-    setSearchRequest(newSearchRequest);
-  }, []);
+  const {
+    isFetching: isLoadingPhotos,
+    isError: isErrorPhotos,
+    data: fetchedPhotosCards,
+    error: errorPhotosFetching,
+  } = useFetchPhotosBySearchRequestQuery(searchRequest || DEFAULT_SEARCH_REQUEST);
 
-  const setError = useCallback((errorMessage: string) => {
-    setIsError(Boolean(errorMessage));
-    setErrorMessage(errorMessage);
-  }, []);
-
-  const updateSearchResults = useCallback(
-    async (searchRequest: string) => {
-      setIsLoading(true);
-
-      try {
-        const cards: CardType[] = await getCardsFromFlickr(searchRequest || DEFAULT_SEARCH_REQUEST);
-        setCards(cards);
-      } catch (error) {
-        const errorMessage = (error as Error).message || ERROR_MESSAGES.DEFAULT;
-        setError(errorMessage);
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    [setError]
-  );
+  const {
+    isFetching: isLoadingPhotoInfo,
+    isError: isErrorPhotoInfo,
+    data: fetchedCurrentPhotoCard,
+    error: errorPhotoInfoFetching,
+  } = useFetchPhotoInfoByIdQuery(currentPhotoCardId || skipToken);
 
   useEffect(() => {
-    updateSearchResults(searchRequest);
-  }, [updateSearchResults, searchRequest]);
+    setIsLoading(isLoadingPhotos || isLoadingPhotoInfo);
+  }, [isLoadingPhotos, isLoadingPhotoInfo]);
 
-  const showCurrentPhotoCardPopup = useCallback(
-    async (photoId: string) => {
-      setIsLoading(true);
+  useEffect(() => {
+    setIsError(isErrorPhotos || isErrorPhotoInfo);
+  }, [isErrorPhotos, isErrorPhotoInfo]);
 
-      try {
-        const currentPhoto: CardType = await getPhotoCardFromFlickr(photoId);
-        setCurrentPhotoCard(currentPhoto);
-        setIsPopupOpen(true);
-      } catch (error) {
-        const errorMessage = (error as Error).message || ERROR_MESSAGES.DEFAULT;
-        setError(errorMessage);
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    [setError]
-  );
+  useEffect(() => {
+    let errorMessage: string | undefined;
+
+    if (errorPhotosFetching) {
+      errorMessage = getErrorMessage(errorPhotosFetching);
+    } else if (errorPhotoInfoFetching) {
+      errorMessage = getErrorMessage(errorPhotoInfoFetching);
+    }
+
+    setErrorMessage(errorMessage || DEFAULT_ERROR_MESSAGE);
+  }, [errorPhotosFetching, errorPhotoInfoFetching]);
+
+  useEffect(() => {
+    dispatch(addSearchResultCards(fetchedPhotosCards));
+  }, [dispatch, fetchedPhotosCards]);
+
+  const showCurrentPhotoCardPopup = useCallback((photoId: string) => {
+    setCurrentPhotoCardId(photoId);
+    setIsPopupOpen(true);
+  }, []);
 
   const closePopup = useCallback(() => {
     setIsPopupOpen(false);
   }, []);
 
   const closeErrorPopup = useCallback(() => {
-    setError('');
+    setIsError(false);
     closePopup();
-  }, [closePopup, setError]);
+  }, [closePopup, setIsError]);
 
   return (
     <>
       {isLoading && <Spinner />}
 
-      <SearchBar
-        searchRequest={searchRequest}
-        updateSearchRequest={updateSearchRequest}
-        placeholder={`Default request - "${DEFAULT_SEARCH_REQUEST}"`}
-      />
+      <SearchBar placeholder={`Default request - "${DEFAULT_SEARCH_REQUEST}"`} />
       <CardsList cards={cards} onCardClickHandler={showCurrentPhotoCardPopup} />
 
       {isPopupOpen && (
         <Popup closePopup={closePopup}>
-          <PopupCard card={currentPhotoCard} />
+          <PopupCard card={fetchedCurrentPhotoCard} />
         </Popup>
       )}
 

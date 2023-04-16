@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import PopupCard from './PopupCard';
 
-import { mockCardsData } from '../../tests-data/testMockCardsData';
+import { mockCardsData } from '../../tests-common/testMockCardsData';
 const mockCardData = { ...mockCardsData[1], description: 'Test card', views: 56 };
 
 test('renders full card', () => {

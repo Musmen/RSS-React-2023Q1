@@ -1,36 +1,23 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { vi } from 'vitest';
 
+import RenderWithStore from '../../tests-common/RenderWithStore';
 import Home from './Home';
 
-import { MOCK_FLICKR_API_RESPONSE } from '../../tests-data/mockFlickrApiResponse';
-
-const MOCK_FETCHING_DELAY = 50;
+import { MOCK_FLICKR_API_RESPONSE } from '../../tests-common/mockFlickrApiResponse';
 
 describe('Start Home Page testing', () => {
   let searchBarInputElement: HTMLElement;
 
   beforeEach(() => {
-    render(<Home />);
-    searchBarInputElement = screen.getByRole('textbox');
-
-    global.fetch = vi.fn(
-      () =>
-        new Promise((resolve) => {
-          setTimeout(() => {
-            resolve({
-              json: () => Promise.resolve(MOCK_FLICKR_API_RESPONSE),
-              ok: true,
-            } as Response);
-          }, MOCK_FETCHING_DELAY);
-        })
+    render(
+      <RenderWithStore>
+        <Home />
+      </RenderWithStore>
     );
-  });
 
-  afterEach(() => {
-    vi.restoreAllMocks();
+    searchBarInputElement = screen.getByRole('textbox');
   });
 
   it('should render search bar input', () => {

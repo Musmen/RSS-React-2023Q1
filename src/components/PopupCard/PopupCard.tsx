@@ -6,10 +6,11 @@ import parse from 'html-react-parser';
 import { CardType } from '../../models/card';
 
 interface PopupCardProps {
-  card: CardType;
+  card: CardType | undefined;
 }
 
 function PopupCard({ card }: PopupCardProps) {
+  if (!card) return <></>;
   const { id, title, imgSrc, author, date, description, views } = card;
 
   return (

@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import RenderWithStore from '../../tests-common/RenderWithStore';
 import SearchBar from './SearchBar';
 
 describe('Start SearchBar testing', () => {
@@ -9,7 +10,11 @@ describe('Start SearchBar testing', () => {
   let unmount: () => void;
 
   beforeEach(() => {
-    unmount = render(<SearchBar />).unmount;
+    unmount = render(
+      <RenderWithStore>
+        <SearchBar />
+      </RenderWithStore>
+    ).unmount;
     searchBarInputElement = screen.getByRole('textbox');
   });
 
@@ -58,7 +63,11 @@ describe('Start SearchBar testing', () => {
     unmount();
     expect(searchBarInputElement).not.toBeInTheDocument();
 
-    render(<SearchBar />);
+    render(
+      <RenderWithStore>
+        <SearchBar />
+      </RenderWithStore>
+    );
     expect(searchBarInputElement).toHaveValue(MOCKED_USER_INPUT);
   });
 });

@@ -26,6 +26,12 @@ Task link: [https://github.com/rolling-scopes-school/tasks/tree/master/react/mod
 
 Deploy: [https://musmen-react-api.netlify.app/](https://musmen-react-api.netlify.app/)
 
+## Task "React. Redux"
+
+Task link: [https://github.com/rolling-scopes-school/tasks/tree/master/react/modules/module05](https://github.com/rolling-scopes-school/tasks/tree/master/react/modules/module05)
+
+Deploy: [https://musmen-react-redux.netlify.app/](https://musmen-react-redux.netlify.app/)
+
 ### Brief instructions for installing and using the project
 
 #### **Installation:**
