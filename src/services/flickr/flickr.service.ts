@@ -2,6 +2,9 @@ import { CardType } from '../../models/card';
 import { FlickrPhoto, FlickrSearchResponse, FlickrPhotoResponse } from './flickr.models';
 import { ONE_SECOND_IN_MILLISECONDS } from '../../common/constants';
 
+const getFlickrDate = (rowData: string) =>
+  new Date(Number(rowData) * ONE_SECOND_IN_MILLISECONDS).toLocaleDateString();
+
 export const parseFlickrResponseToCards = (
   flickrResponse: FlickrSearchResponse | undefined
 ): CardType[] => {
@@ -14,7 +17,7 @@ export const parseFlickrResponseToCards = (
       title,
       imgSrc: url_m,
       author: ownername,
-      date: new Date(Number(dateupload) * ONE_SECOND_IN_MILLISECONDS).toLocaleDateString(),
+      date: getFlickrDate(dateupload),
     };
     return card;
   });
@@ -39,7 +42,7 @@ export const parseFlickrPhotoResponseToCard = (
     title: title._content,
     imgSrc: getFlickrImgSrc(id, secret, server),
     author: realname || username,
-    date: dateuploaded,
+    date: getFlickrDate(dateuploaded),
     description: description._content,
     views: views,
   };
