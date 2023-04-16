@@ -13,8 +13,8 @@ const searchSlice = createSlice({
     updateSearchRequest: (state, action: PayloadAction<string>) => {
       state.request = action.payload;
     },
-    addSearchResultCards: (state, action: PayloadAction<CardType[]>) => {
-      state.resultCards = action.payload;
+    addSearchResultCards: (state, action: PayloadAction<CardType[] | undefined>) => {
+      state.resultCards = action.payload || [];
     },
   },
 });

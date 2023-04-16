@@ -1,10 +1,13 @@
-import { ERROR_MESSAGES } from './constants';
+import { SerializedError } from '@reduxjs/toolkit';
+import { CustomFetchError } from '../models/errors';
 
 export const getRandom = (maxNumber: number) => Math.floor(Math.random() * maxNumber);
 
-export const fetchData = async (url: string) => {
-  const response = await fetch(url);
-  const result = await response.json();
-  if (!response.ok) throw new Error(result?.message || ERROR_MESSAGES.DEFAULT);
-  return result;
+export const getErrorMessage = (errorInstance: CustomFetchError | SerializedError) => {
+  if ('status' in errorInstance) {
+    if ('error' in errorInstance) {
+      return errorInstance.error;
+    }
+    return JSON.stringify(errorInstance.data);
+  }
 };

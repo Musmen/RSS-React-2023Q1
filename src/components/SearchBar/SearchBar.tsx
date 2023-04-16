@@ -1,8 +1,8 @@
 import './SearchBar.css';
 
 import React, { ChangeEvent, FormEvent, useCallback, useState } from 'react';
-import { updateSearchRequest } from '../../redux/slices/search.slice';
 
+import { updateSearchRequest } from '../../redux/slices/search.slice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 
 interface SearchBarProps {
