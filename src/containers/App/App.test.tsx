@@ -1,8 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-
-import App from './App';
 import { MemoryRouter } from 'react-router-dom';
+
+import RenderWithStore from '../../tests-common/RenderWithStore';
+import App from './App';
 
 describe('Start App testing', () => {
   const checkPageCommonLayout = () => {
@@ -21,15 +22,20 @@ describe('Start App testing', () => {
     });
   };
 
-  describe('Should render about page', () => {
+  const renderWithRouterAndStore = (route: string) => {
     beforeEach(() => {
       render(
-        <MemoryRouter initialEntries={['/about']}>
-          <App />
-        </MemoryRouter>
+        <RenderWithStore>
+          <MemoryRouter initialEntries={[route]}>
+            <App />
+          </MemoryRouter>
+        </RenderWithStore>
       );
     });
+  };
 
+  describe('Should render about page', () => {
+    renderWithRouterAndStore('/about');
     checkPageCommonLayout();
 
     it('Should render about page content', () => {
@@ -38,14 +44,7 @@ describe('Start App testing', () => {
   });
 
   describe('Should render card form page', () => {
-    beforeEach(() => {
-      render(
-        <MemoryRouter initialEntries={['/form']}>
-          <App />
-        </MemoryRouter>
-      );
-    });
-
+    renderWithRouterAndStore('/form');
     checkPageCommonLayout();
 
     it('Should render form', () => {
@@ -55,14 +54,7 @@ describe('Start App testing', () => {
   });
 
   describe('Should render not-found page', () => {
-    beforeEach(() => {
-      render(
-        <MemoryRouter initialEntries={['/unknown-page']}>
-          <App />
-        </MemoryRouter>
-      );
-    });
-
+    renderWithRouterAndStore('/unknown-page');
     checkPageCommonLayout();
 
     it('Should render not-found page content', () => {

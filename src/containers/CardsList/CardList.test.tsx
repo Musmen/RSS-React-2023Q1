@@ -5,7 +5,7 @@ import CardsList from './CardsList';
 
 import { getRandom } from '../../common/helpers';
 
-import { mockCardsData } from '../../tests-data/testMockCardsData';
+import { mockCardsData } from '../../tests-common/testMockCardsData';
 const cardsCount = mockCardsData.length;
 
 const mockBigCardsData = mockCardsData.map((card) => ({

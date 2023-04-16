@@ -11,7 +11,7 @@ import { CustomFetchError } from '../../models/errors';
 const flickrApi = createApi({
   reducerPath: 'flickrApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://www.flickr.com/services/rest',
+    baseUrl: API_URL.BASE,
   }) as BaseQueryFn<string | FetchArgs, unknown, CustomFetchError, unknown>,
   endpoints: (builder) => ({
     fetchPhotosBySearchRequest: builder.query<CardType[], string>({

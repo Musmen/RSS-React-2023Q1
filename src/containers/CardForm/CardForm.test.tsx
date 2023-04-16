@@ -9,7 +9,7 @@ import { getTodayDateISOString } from './CardForm.helpers';
 import CardForm from './CardForm';
 import { TYPE_SELECT_OPTIONS, VALIDATION_ERRORS_MESSAGES } from './CardForm.constants';
 
-import { mockCardsData } from '../../tests-data/testMockCardsData';
+import { mockCardsData } from '../../tests-common/testMockCardsData';
 const cardsCount = mockCardsData.length;
 
 describe('Start CardForm testing', () => {
