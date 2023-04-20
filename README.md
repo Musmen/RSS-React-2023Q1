@@ -32,6 +32,10 @@ Task link: [https://github.com/rolling-scopes-school/tasks/tree/master/react/mod
 
 Deploy: [https://musmen-react-redux.netlify.app/](https://musmen-react-redux.netlify.app/)
 
+## Task "React. SSR/SSG"
+
+Task link: [https://github.com/rolling-scopes-school/tasks/tree/master/react/modules/module06](https://github.com/rolling-scopes-school/tasks/tree/master/react/modules/module06)
+
 ### Brief instructions for installing and using the project
 
 #### **Installation:**
