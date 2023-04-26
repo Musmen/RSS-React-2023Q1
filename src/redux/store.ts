@@ -10,10 +10,15 @@ const rootReducer = combineReducers({
   [flickrApi.reducerPath]: flickrApi.reducer,
 });
 
-export const store = configureStore({
-  reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(flickrApi.middleware),
-});
+export const getNewStore = <T>(preloadedState?: T) =>
+  configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(flickrApi.middleware),
+    preloadedState,
+  });
 
+export const store = getNewStore();
+
+export type RootStore = typeof store;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

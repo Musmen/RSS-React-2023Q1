@@ -2,14 +2,18 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react({ fastRefresh: false })],
+  worker: {
+    plugins: [react()],
+  },
   test: {
     globals: true,
     environment: 'jsdom',
     setupFiles: './setupTests.ts',
     coverage: {
       exclude: [
-        'vite.config.ts', 'src/vite-env.d.ts', 'src/index.tsx', '**/*.test.tsx', '**/*.test.ts', 'dist', 'src/models', '**/*.models.ts'
+        'vite.config.ts', '**/*.d.ts', 'src/index.tsx', '**/*.test.tsx',
+        '**/*.test.ts', 'dist', 'src/models', '**/*.model.ts', '**/*.models.ts'
       ],
       provider: 'c8',
       all: true,
