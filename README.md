@@ -59,12 +59,14 @@ After successfully installing dependencies
 On the command line, run `npm run ` and
 
 ```sh
-`dev` - start the project in development mode and hot debugging (default local-host http://127.0.0.1:5173/);
+`dev` - start the project in development mode and hot debugging ;
+`dev:ssr` - start the project in development mode with SSR (open in browser local-host http://127.0.0.1:5000/)
 `build` - project build in production mode;
 `lint` - start checking esLint;
 `lint:fix` - run esLint check with automatic error correction if possible;
 `format` - start prettier for code formatting;
 `pre-commit` - sequential launch of esLint, prettier, stylelint with automatic error correction if possible. Designed to run before each commit to the repository or before project build;
 `test` - run tests (watching mode);
-`test:coverage` - run tests and print test-coverage report.
+`test:coverage` - run unit-tests and print test-coverage report;
+`test:e2e-coverage` - run e2e-tests (via cypress) and print test-coverage report.
 ```
