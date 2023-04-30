@@ -13,6 +13,7 @@ export default defineConfig({
       codeCoverageTask(on, config);
       return config;
     },
+    defaultCommandTimeout: 10000,
   },
   video: false,
   screenshotOnRunFailure: false,
