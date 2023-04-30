@@ -5,34 +5,44 @@
   "type": "module",
   "scripts": {
     "dev": "npm run pre-commit && vite",
+    "dev:ssr": "ts-node-esm server.ts",
     "build": "npm run pre-commit && vite build",
     "lint": "eslint ./src --ext .js,.ts,.jsx,.tsx",
     "lint:fix": "eslint ./src --ext .js,.ts,.jsx,.tsx --fix --max-warnings=0",
     "format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,scss}",
     "pre-commit": "npm run lint:fix && npm run format",
     "test": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "test:e2e-coverage": "start-server-and-test dev:ssr http-get://localhost:5000 cypress:e2e",
+    "cypress:e2e": "nyc instrument src && nyc npx cypress run && nyc report --reporter=text --reporter=text-summary"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
+    "express": "^4.18.2",
     "html-react-parser": "^3.0.15",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
     "react-redux": "^8.0.5",
-    "react-router-dom": "^6.9.0"
+    "react-router-dom": "^6.9.0",
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.10.4",
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
+    "@types/express": "^4.17.17",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@typescript-eslint/eslint-plugin": "^5.55.0",
     "@typescript-eslint/parser": "^5.55.0",
     "@vitejs/plugin-react": "^3.1.0",
     "@vitest/coverage-c8": "^0.29.3",
+    "babel-plugin-istanbul": "^6.1.1",
     "cross-fetch": "^3.1.5",
+    "cypress": "^12.11.0",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.7.0",
     "eslint-import-resolver-typescript": "^3.5.3",
@@ -42,9 +52,12 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "jsdom": "^21.1.1",
     "msw": "^1.2.1",
+    "nyc": "^15.1.0",
     "prettier": "^2.8.4",
+    "start-server-and-test": "^2.0.0",
     "typescript": "^4.9.3",
     "vite": "^4.1.0",
+    "vite-plugin-istanbul": "^4.0.1",
     "vitest": "^0.29.3"
   }
 }

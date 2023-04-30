@@ -32,6 +32,10 @@ Task link: [https://github.com/rolling-scopes-school/tasks/tree/master/react/mod
 
 Deploy: [https://musmen-react-redux.netlify.app/](https://musmen-react-redux.netlify.app/)
 
+## Task "React. SSR/SSG"
+
+Task link: [https://github.com/rolling-scopes-school/tasks/tree/master/react/modules/module06](https://github.com/rolling-scopes-school/tasks/tree/master/react/modules/module06)
+
 ### Brief instructions for installing and using the project
 
 #### **Installation:**
@@ -45,7 +49,7 @@ Deploy: [https://musmen-react-redux.netlify.app/](https://musmen-react-redux.net
 ```
 
 ```sh
-3. Go to the project folder, switch branch to the `react-hooks` (`git checkout react-hooks`) and run `npm install` (for installing dependencies) on the command line (in the terminal, for example)
+3. Go to the project folder, switch branch to the `react-ssr` (`git checkout react-ssr`) and run `npm install` (for installing dependencies) on the command line (in the terminal, for example)
 ```
 
 After successfully installing dependencies
@@ -55,12 +59,14 @@ After successfully installing dependencies
 On the command line, run `npm run ` and
 
 ```sh
-`dev` - start the project in development mode and hot debugging (default local-host http://127.0.0.1:5173/);
+`dev` - start the project in development mode and hot debugging ;
+`dev:ssr` - start the project in development mode with SSR (open in browser local-host http://127.0.0.1:5000/)
 `build` - project build in production mode;
 `lint` - start checking esLint;
 `lint:fix` - run esLint check with automatic error correction if possible;
 `format` - start prettier for code formatting;
 `pre-commit` - sequential launch of esLint, prettier, stylelint with automatic error correction if possible. Designed to run before each commit to the repository or before project build;
 `test` - run tests (watching mode);
-`test:coverage` - run tests and print test-coverage report.
+`test:coverage` - run unit-tests and print test-coverage report;
+`test:e2e-coverage` - run e2e-tests (via cypress) and print test-coverage report.
 ```
